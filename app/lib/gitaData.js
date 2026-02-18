@@ -2963,4 +2963,131 @@ and observe the field as it truly is (Sanjaya’s perspective).`,
       ],
     },
   },
+  "ch1-v23": {
+    sanskrit_text: "",
+    transliteration: "",
+    english_translation: "",
+    commentary: {
+      media: {
+        image: "",
+        video: "",
+      },
+      Literal: "",
+      Philosophical: {
+        Philosophical_insight: "",
+        Philosophical_Levels: [
+          {
+            title: "",
+            text: "",
+          },
+          {
+            title: "",
+            text: "",
+          },
+          {
+            title: "",
+            text: "",
+          },
+        ],
+      },
+      Psychological_context: null,
+      Psychological: [
+        {
+          title: "",
+          text: "",
+        },
+        {
+          title: "",
+          text: "",
+        },
+        {
+          title: "",
+          text: "",
+        },
+      ],
+      Spiritual_insight: null,
+      Spiritual: [
+        {
+          title: "",
+          text: "",
+        },
+        {
+          title: "",
+          text: "",
+        },
+        {
+          title: "",
+          text: "",
+        },
+      ],
+      Scientific_Rational_Perspective: {
+        intro: null,
+        points: [
+          {
+            heading: "",
+            text: ``,
+          },
+          {
+            heading: "",
+            text: ``,
+          },
+        ],
+      },
+      Modern: [
+        {
+          label: "Work & Career",
+          text: "",
+        },
+        {
+          label: "Relationships",
+          text: "",
+        },
+        {
+          label: "Inner Conflicts",
+          text: "",
+        },
+      ],
+      Mindset: {
+        text: "",
+        points: [
+          {
+            title: "",
+            text: "",
+          },
+          {
+            title: "",
+            text: "",
+          },
+          {
+            title: "",
+            text: "",
+          },
+        ],
+      },
+      Misinterpretations: {
+        worng: [
+          {
+            title: "",
+            text: "",
+          },
+        ],
+        Correct: [
+          {
+            title: "",
+            text: "",
+          },
+        ],
+      },
+      Inquiry: [
+        {
+          heading: "",
+          text: "",
+        },
+        {
+          heading: "",
+          text: "",
+        },
+      ],
+    },
+  },
 };

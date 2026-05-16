@@ -1,52 +1,60 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-export default function SmoothScroll({ children }) {
+// Safe layout effect for Next.js SSR
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+export default function SmoothScroll({
+  children,
+  // --- SCROLL CUSTOMIZATION PROPS ---
+  lerp = 0.08, // Scroll friction/smoothness (lower = smoother but slower)
+  duration = 1.2, // Scroll duration
+  smoothWheel = true, // Enable smooth scrolling for mouse wheels
+  smoothTouch = false, // Native scroll on touch devices is usually better UX
+  infinite = false, // Set to true for infinite looping scroll
+}) {
   const lenisRef = useRef(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    // 1. Initialize Lenis with customizable props
     const lenis = new Lenis({
-      smooth: true,
-      lerp: 0.08,
+      duration,
+      lerp,
+      smoothWheel,
+      smoothTouch,
+      infinite,
     });
 
     lenisRef.current = lenis;
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // 2. Sync Lenis scroll with GSAP ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    // 3. Connect Lenis `raf` to GSAP's ticker (Modern standard integration)
+    const updateLenis = (time) => {
+      lenis.raf(time * 1000);
+    };
 
-    ScrollTrigger.scrollerProxy(document.body, {
-      scrollTop(value) {
-        return arguments.length ? lenis.scrollTo(value) : window.scrollY;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-    });
+    gsap.ticker.add(updateLenis);
 
-    ScrollTrigger.addEventListener("refresh", () => lenis.resize());
-    ScrollTrigger.refresh();
+    // 4. Prevent GSAP from lagging behind the smooth scroll
+    gsap.ticker.lagSmoothing(0);
 
+    // 5. Cleanup on unmount
     return () => {
       lenis.destroy();
-      ScrollTrigger.killAll();
+      gsap.ticker.remove(updateLenis);
     };
-  }, []);
+  }, [duration, lerp, smoothWheel, smoothTouch, infinite]);
 
   return <>{children}</>;
 }

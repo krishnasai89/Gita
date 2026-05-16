@@ -3,31 +3,39 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-import { Twitter, Github, Mail, ArrowUpCircle } from "lucide-react"; // Install lucide-react
+import {
+  Twitter,
+  Github,
+  Mail,
+  ArrowUp,
+  Send,
+  BookOpen,
+  Quote,
+} from "lucide-react";
 
 export default function Footer() {
   const footerRef = useRef();
 
   useGSAP(
     () => {
-      // Subtle glow pulse for the subscription box
-      gsap.to(".glow-box", {
-        boxShadow: "0 0 25px 2px rgba(245, 158, 11, 0.4)",
+      // 1. Slow Rotating Mandala
+      gsap.to(".footer-mandala", {
+        rotation: 360,
+        duration: 150,
         repeat: -1,
-        yoyo: true,
-        duration: 2.5,
-        ease: "sine.inOut",
+        ease: "none",
       });
 
-      // Stagger reveal for footer links
-      gsap.from(".footer-link-group", {
+      // 2. Staggered Reveal on Scroll
+      gsap.from(".footer-reveal", {
         opacity: 0,
-        y: 20,
-        stagger: 0.2,
+        y: 30,
+        stagger: 0.15,
         duration: 1,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 90%",
+          start: "top 85%",
         },
       });
     },
@@ -41,60 +49,118 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-stone-950 border-t border-white/5 pt-32 pb-10 px-6 relative overflow-hidden"
+      className="bg-[#020202] border-t border-white/5 pt-32 pb-10 px-6 relative overflow-hidden font-sans"
     >
-      {/* Decorative Background Element (Faint Mandala Fragment) */}
-      <div className="absolute -bottom-20 -right-20 w-96 h-96 border border-amber-500/5 rounded-full opacity-20 pointer-events-none" />
-      <div className="absolute -bottom-10 -right-10 w-64 h-64 border border-amber-500/10 rounded-full opacity-10 pointer-events-none" />
+      {/* 1. BACKGROUND: THE ETERNAL CYCLE */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
+        {/* Deep ambient glow */}
+        <div className="absolute bottom-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_bottom,rgba(245,158,11,0.10)_0%,transparent_70%)]" />
+
+        {/* Rotating Mandala Watermark */}
+        <div className="footer-mandala absolute -bottom-[400px] -right-[200px] opacity-[0.03] scale-[2] md:scale-[3] text-amber-500">
+          <svg width="800" height="800" viewBox="0 0 200 200">
+            <circle
+              cx="100"
+              cy="100"
+              r="90"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+            />
+            <circle
+              cx="100"
+              cy="100"
+              r="80"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.2"
+              strokeDasharray="2 4"
+            />
+            {[...Array(24)].map((_, i) => (
+              <path
+                key={i}
+                d="M100 20 L105 50 L100 100 L95 50 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.2"
+                transform={`rotate(${i * 15} 100 100)`}
+              />
+            ))}
+          </svg>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Top Section: Subscription & Brand */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24">
+        {/* 2. TOP SECTION: THE INVITATION */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-32 footer-reveal">
           <div className="max-w-xl">
-            <h3 className="text-3xl font-serif text-amber-500 mb-4">
-              Daily Dharma
+            <div className="flex items-center gap-3 mb-6 opacity-60">
+              <Quote size={16} className="text-amber-500" />
+              <span className="text-stone-400 text-[10px] font-black tracking-[0.4em] uppercase">
+                Daily Dharma
+              </span>
+            </div>
+            <h3 className="text-4xl md:text-5xl font-serif text-white mb-6">
+              The Luminous <span className="italic text-amber-500">Lamp</span>
             </h3>
-            <p className="text-stone-400 text-lg font-light leading-relaxed">
-              One verse of wisdom every morning. No noise. Just the eternal song
-              to guide your journey through the modern battlefield.
+            <p className="text-stone-400 text-lg font-light leading-relaxed mb-8">
+              "Out of compassion, I destroy the darkness of their ignorance with
+              the luminous lamp of knowledge." <br />
+              <span className="text-[10px] uppercase tracking-widest font-bold text-amber-500/60 mt-4 block">
+                Receive one verse every morning.
+              </span>
             </p>
           </div>
 
-          <div className="w-full lg:w-auto">
-            <div className="glow-box relative flex w-full md:w-[450px] p-1 bg-stone-900/50 backdrop-blur-sm border border-amber-500/20 rounded-sm">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                suppressHydrationWarning
-                className="bg-transparent border-none outline-none text-stone-200 px-6 py-4 w-full text-sm placeholder:text-stone-600"
-              />
-              <button
-                suppressHydrationWarning
-                className="bg-amber-600 hover:bg-amber-500 text-stone-950 font-black px-8 py-2 transition-all text-[10px] uppercase tracking-widest whitespace-nowrap"
-              >
-                Join Now
-              </button>
+          <div className="flex flex-col justify-center">
+            <div className="relative group w-full max-w-md">
+              {/* Focus Glow Ring */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-amber-600/0 via-amber-500/30 to-amber-600/0 rounded-full blur-md opacity-0 group-focus-within:opacity-100 transition-opacity duration-700" />
+
+              <form className="relative flex items-center bg-stone-900/60 backdrop-blur-xl border border-white/10 rounded-full p-1.5 focus-within:border-amber-500/50 transition-colors">
+                <Mail className="text-stone-500 ml-4" size={18} />
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                  suppressHydrationWarning // <-- Add this line back right here!
+                  className="bg-transparent border-none outline-none text-stone-200 px-4 py-3 w-full text-sm placeholder:text-stone-600 font-light"
+                />
+                <button
+                  type="button"
+                  className="bg-amber-600 hover:bg-amber-500 text-black rounded-full px-6 py-3 transition-colors flex items-center gap-2 group/btn"
+                >
+                  <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+                    Subscribe
+                  </span>
+                  <Send
+                    size={12}
+                    className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"
+                  />
+                </button>
+              </form>
             </div>
-            <p className="text-[10px] text-stone-600 mt-4 uppercase tracking-[0.2em]">
-              Privacy respected. Wisdom shared.
+            <p className="text-[9px] text-stone-600 mt-4 uppercase tracking-[0.2em] ml-4">
+              No noise. Just the eternal song.
             </p>
           </div>
         </div>
 
-        {/* Middle Section: Links & Heritage */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-b border-white/5 pb-20">
-          <div className="footer-link-group flex flex-col gap-6">
+        {/* 3. MIDDLE SECTION: NAVIGATION MATRIX */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-y border-white/5 py-20 mb-10">
+          <div className="flex flex-col gap-6 footer-reveal">
             <span className="text-amber-500 text-[10px] font-black tracking-[0.4em] uppercase">
               The Scripture
             </span>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {["18 Adhyayas", "700 Shlokas", "Characters", "The Chariot"].map(
                 (link) => (
                   <Link
                     key={link}
                     href="#"
-                    className="text-stone-500 hover:text-amber-500 text-sm transition-colors font-light italic"
+                    className="group flex items-center gap-2 text-stone-500 hover:text-white text-sm transition-colors font-light"
                   >
+                    <span className="w-0 h-px bg-amber-500 transition-all duration-300 group-hover:w-4" />
                     {link}
                   </Link>
                 ),
@@ -102,11 +168,11 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="footer-link-group flex flex-col gap-6">
+          <div className="flex flex-col gap-6 footer-reveal">
             <span className="text-amber-500 text-[10px] font-black tracking-[0.4em] uppercase">
               The Lineage
             </span>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {[
                 "Adi Shankara",
                 "The Bhashya",
@@ -116,75 +182,84 @@ export default function Footer() {
                 <Link
                   key={link}
                   href="#"
-                  className="text-stone-500 hover:text-amber-500 text-sm transition-colors font-light italic"
+                  className="group flex items-center gap-2 text-stone-500 hover:text-white text-sm transition-colors font-light"
                 >
+                  <span className="w-0 h-px bg-amber-500 transition-all duration-300 group-hover:w-4" />
                   {link}
                 </Link>
               ))}
             </div>
           </div>
 
-          <div className="footer-link-group flex flex-col gap-6">
+          <div className="flex flex-col gap-6 footer-reveal md:col-span-2 lg:col-span-1">
             <span className="text-amber-500 text-[10px] font-black tracking-[0.4em] uppercase">
               Connect
             </span>
-            <div className="flex gap-4">
-              <Link
-                href="#"
-                className="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 transition-all border border-white/5"
-              >
-                <Twitter size={18} className="text-stone-400" />
-              </Link>
-              <Link
-                href="#"
-                className="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 transition-all border border-white/5"
-              >
-                <Github size={18} className="text-stone-400" />
-              </Link>
-              <Link
-                href="#"
-                className="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 transition-all border border-white/5"
-              >
-                <Mail size={18} className="text-stone-400" />
-              </Link>
+            <div className="flex gap-3">
+              {[
+                { icon: <Twitter size={16} />, href: "#" },
+                {
+                  icon: <Github size={16} />,
+                  href: "https://github.com/krishnasai89",
+                },
+                { icon: <BookOpen size={16} />, href: "#" },
+              ].map((social, i) => (
+                <Link
+                  key={i}
+                  href={social.href}
+                  className="w-12 h-12 bg-stone-900/40 rounded-full flex items-center justify-center text-stone-500 border border-white/5 hover:border-amber-500/50 hover:text-amber-400 hover:bg-amber-950/20 hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_5px_15px_rgba(245,158,11,0.2)]"
+                >
+                  {social.icon}
+                </Link>
+              ))}
             </div>
           </div>
 
-          <div className="footer-link-group flex flex-col items-end justify-center">
+          {/* Ascend Button (Scroll to top) */}
+          <div className="flex flex-col items-start md:items-end justify-center footer-reveal lg:col-span-1">
             <button
               onClick={scrollToTop}
-              suppressHydrationWarning
-              className="group flex flex-col items-center gap-2 text-stone-600 hover:text-amber-500 transition-all"
+              className="group flex flex-col items-center gap-4 text-stone-600 hover:text-amber-500 transition-colors"
             >
-              <ArrowUpCircle
-                size={32}
-                strokeWidth={1}
-                className="group-hover:-translate-y-2 transition-transform"
-              />
-              <span className="text-[10px] uppercase tracking-[0.3em]">
-                Top
+              <div className="w-10 h-10 rounded-full border border-stone-800 group-hover:border-amber-500/50 flex items-center justify-center transition-colors relative overflow-hidden">
+                <div className="absolute bottom-0 w-full h-0 bg-amber-500/10 group-hover:h-full transition-all duration-300" />
+                <ArrowUp
+                  size={16}
+                  className="group-hover:-translate-y-1 transition-transform duration-300 relative z-10"
+                />
+              </div>
+              <span
+                className="text-[9px] uppercase tracking-[0.3em] font-bold"
+                style={{ writingMode: "vertical-rl" }}
+              >
+                Ascend
               </span>
             </button>
           </div>
         </div>
 
-        {/* Bottom Section: Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-12 gap-6">
+        {/* 4. BOTTOM SECTION: COPYRIGHT & SEAL */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 footer-reveal">
           <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-full border border-amber-500/20 flex items-center justify-center text-[10px] text-amber-500 font-serif">
+            <div className="w-10 h-10 rounded-full border border-amber-500/20 bg-amber-500/5 flex items-center justify-center text-sm text-amber-500 font-serif">
               ॐ
             </div>
-            <div className="text-lg font-serif tracking-widest text-stone-300">
-              Bhagavad <span className="text-amber-500">Gita</span>
+            <div>
+              <div className="text-xl font-serif tracking-widest text-white leading-none">
+                Bhagavad <span className="text-amber-500 italic">Gita</span>
+              </div>
+              <span className="text-[8px] text-stone-600 uppercase tracking-widest font-black">
+                The Song of God
+              </span>
             </div>
           </div>
 
           <div className="text-center md:text-right">
-            <p className="text-stone-600 text-[10px] uppercase tracking-[0.3em] mb-1">
-              © 2026 Crafted for the Modern Seeker
+            <p className="text-stone-500 text-[10px] uppercase tracking-[0.3em] mb-1.5 font-bold">
+              © {new Date().getFullYear()} Crafted for the Modern Seeker
             </p>
-            <p className="text-stone-800 text-[9px] uppercase tracking-[0.2em]">
-              Next.js 14 • GSAP 3 • Tailwind CSS • Prismic
+            <p className="text-stone-700 text-[9px] uppercase tracking-[0.2em]">
+              Next.js 14 • GSAP 3 • Tailwind CSS
             </p>
           </div>
         </div>

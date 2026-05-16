@@ -2,35 +2,47 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
-import { Search as SearchIcon } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import { Search as SearchIcon, BookOpen } from "lucide-react";
 import dynamic from "next/dynamic";
+
 // Components
 import CommentarySection from "./CommentarySection";
-
 import VerseNavigation from "./VerseNavigation";
 import VerseSearch from "./VerseSearch/VerseSearch";
 import SearchOverlay from "./SearchOverlay/SearchOverlay";
 import Mindset from "./tabContentMap/Mindset ";
 
-// Data
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function VerseDetails({ data, pagination, chapterId }) {
+const GlossarySidebar = dynamic(() => import("./GlossarySidebar"), {
+  ssr: false,
+  loading: () => (
+    <div className="fixed inset-y-0 right-0 w-80 bg-[#0c0a09] animate-pulse z-[200]" />
+  ),
+});
+
+export default function VerseDetails({
+  data,
+  pagination,
+  chapterId,
+  glossaryData,
+}) {
+  const containerRef = useRef(null);
   const miniHeaderRef = useRef(null);
   const mainVerseRef = useRef(null);
-  const mediaRef = useRef(null);
-  const hasMedia = data.commentary.media.image || data.commentary.media.video;
+
   // --- STATE ---
-  const [index, setIndex] = useState(0);
   const [selectedTerm, setSelectedTerm] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+
+  // --- MEDIA LOGIC ---
   const hasImage = Boolean(data.commentary?.media?.image);
   const hasVideo = Boolean(data.commentary?.media?.video);
-  const hasBoth = hasImage && hasVideo;
+  const hasMedia = hasImage || hasVideo;
 
   // --- GLOSSARY LOGIC ---
   const openGlossary = (termKey) => {
@@ -39,45 +51,60 @@ export default function VerseDetails({ data, pagination, chapterId }) {
       setSelectedTerm(glossaryData[key]);
     }
   };
+
   useEffect(() => {
     setHasMounted(true);
   }, []);
-  // Effect B: GSAP Sticky Header
-  useEffect(() => {
-    // We move the "existence guard" INSIDE the effect instead of stopping the whole hook
-    if (!miniHeaderRef.current || !mainVerseRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(miniHeaderRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: mainVerseRef.current,
-          start: "bottom top",
-          toggleActions: "play none none reverse",
+  // --- GSAP ANIMATIONS ---
+  useGSAP(
+    () => {
+      if (!hasMounted) return;
+
+      // 1. Initial Page Load Animation (Staggered Reveal)
+      gsap.fromTo(
+        ".verse-reveal",
+        { opacity: 0, y: 30, filter: "blur(4px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
         },
-      });
-    });
+      );
 
-    return () => ctx.revert();
-  }, [hasMounted, data]); // Runs after mounting and when data changes
+      // 2. Sticky Header Reveal on Scroll
+      if (miniHeaderRef.current && mainVerseRef.current) {
+        gsap.to(miniHeaderRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: mainVerseRef.current,
+            start: "bottom top",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+    },
+    { scope: containerRef, dependencies: [hasMounted, data] },
+  );
 
-  const GlossarySidebar = dynamic(() => import("./GlossarySidebar"), {
-    ssr: false,
-    loading: () => (
-      <div className="fixed inset-y-0 right-0 w-80 bg-stone-900 animate-pulse" />
-    ),
-  });
   return (
-    <section className="relative min-h-screen text-stone-200 bg-stone-950 overflow-x-hidden">
-      {/* SEARCH OVERLAY (Placed high in hierarchy) */}
+    <section
+      ref={containerRef}
+      className="relative min-h-screen text-stone-200 bg-[#030303] overflow-x-hidden font-sans"
+    >
+      {/* Background Ambient Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.06)_0%,transparent_70%)] pointer-events-none" />
+
       <SearchOverlay
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
       />
-
-      {/* GLOSSARY SIDEBAR */}
       <GlossarySidebar
         isOpen={!!selectedTerm}
         onClose={() => setSelectedTerm(null)}
@@ -87,56 +114,69 @@ export default function VerseDetails({ data, pagination, chapterId }) {
       {/* STICKY MINI-HEADER */}
       <div
         ref={miniHeaderRef}
-        className="fixed top-0 left-0 w-full z-[150] bg-stone-950/90 backdrop-blur-md border-b border-white/5 py-4 px-8 translate-y-[-100%] opacity-0"
+        className="fixed top-0 left-0 w-full z-[150] bg-[#030303]/90 backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12 translate-y-[-100%] opacity-0 shadow-2xl"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <span className="text-amber-500 font-mono text-xs font-bold tracking-widest">
-              Adhyāya {data.chapter} • Shloka {data.verse}
-            </span>
-            <h3 className="text-stone-100 font-serif text-sm truncate max-w-md hidden md:block">
-              {data.sanskrit?.split("|")[0]}...
+          <div className="flex items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-2 text-amber-500 font-black tracking-widest text-[10px] uppercase">
+              <BookOpen size={14} />
+              <span className="hidden sm:inline">Adhyāya {data.chapter}</span>
+              <span className="sm:hidden">Ch {data.chapter}</span>
+              <span className="opacity-50">•</span>
+              <span>Verse {data.verse}</span>
+            </div>
+            <h3 className="text-stone-300 font-serif text-sm truncate max-w-[200px] md:max-w-md italic hidden md:block">
+              "{data.translation?.substring(0, 50)}..."
             </h3>
           </div>
 
-          {/* Search Trigger Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            suppressHydrationWarning // <--- Add this
-            className="flex items-center gap-2 text-stone-500 hover:text-amber-500 transition-colors group"
+            suppressHydrationWarning
+            className="flex items-center gap-2 text-stone-500 hover:text-amber-500 transition-colors group px-4 py-2 rounded-full bg-white/5 border border-white/5 hover:border-amber-500/30"
           >
-            <span className="text-[10px] uppercase tracking-widest font-black">
-              Search Index
+            <span className="text-[10px] uppercase tracking-widest font-black hidden sm:block">
+              Search
             </span>
             <SearchIcon
-              size={16}
+              size={14}
               className="group-hover:scale-110 transition-transform"
             />
           </button>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-24">
-        {/* MAIN VERSE DISPLAY */}
-        <div ref={mainVerseRef} className="space-y-4 mt-32 text-center">
-          <h6 className="text-amber-700/50 text-[10px] font-black uppercase tracking-[0.6em]">
-            Adhyāya {data.chapter} • Shloka {data.verse}
+      <div className="max-w-7xl mx-auto px-6 pt-32 pb-24 relative z-10">
+        {/* 1. MAIN VERSE DISPLAY */}
+        <div
+          ref={mainVerseRef}
+          className="space-y-10 mt-12 md:mt-24 text-center max-w-5xl mx-auto"
+        >
+          <h6 className="verse-reveal text-amber-500/60 text-[10px] font-black uppercase tracking-[0.6em]">
+            Adhyāya {data.chapter} <span className="mx-2 opacity-50">•</span>{" "}
+            Shloka {data.verse}
           </h6>
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif text-stone-100 leading-[1.6]">
+
+          <h2 className="verse-reveal text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight md:leading-[1.4] drop-shadow-md">
             {data.sanskrit}
           </h2>
-          <p className="text-amber-500/30 italic text-lg lg:text-xl font-serif">
+
+          <div className="verse-reveal flex justify-center">
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+          </div>
+
+          <p className="verse-reveal text-amber-400/50 italic text-lg md:text-xl font-serif tracking-wide">
             {data.transliteration}
+          </p>
+
+          <p className="verse-reveal text-xl md:text-3xl font-light text-stone-200 italic leading-relaxed md:leading-loose max-w-4xl mx-auto pt-8">
+            "{data.translation}"
           </p>
         </div>
 
-        <p className="text-xl md:text-2xl lg:text-3xl font-light text-stone-300 italic text-center mt-12 mb-20 leading-relaxed max-w-5xl mx-auto">
-          "{data.translation}"
-        </p>
-
-        {/* COMMENTARY TABS */}
+        {/* 2. COMMENTARY SECTION */}
         {data.commentary && (
-          <div className="pt-20">
+          <div className="pt-32">
             <CommentarySection
               commentary={data.commentary}
               onTermClick={openGlossary}
@@ -145,64 +185,16 @@ export default function VerseDetails({ data, pagination, chapterId }) {
         )}
       </div>
 
-      {/* MINDSET & MEDIA BRIDGE */}
-      <div className="mt-40 space-y-16 py-20 border-t border-white/5 pb-0">
-        <h4 className="text-amber-500/50 text-xs font-black tracking-[0.6em] uppercase text-center">
-          The Transformation of Mind
-        </h4>
-        {/* Calculate if we have media once at the top.
-  Check for actual data existence rather than just boolean flags.
-*/}
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-start p-8 pb-0 ${!hasMedia ? "flex justify-center" : ""}`}
-        >
-          {/* MEDIA COLUMN - Only render if media exists */}
-          {hasMedia && (
-            <div className="lg:col-span-2 relative group w-full">
-              <motion.div className="relative rounded-sm overflow-hidden border-[12px] border-stone-900 shadow-2xl bg-black aspect-video">
-                <div
-                  ref={mediaRef}
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  {data.commentary.media.image ? (
-                    <img
-                      src={data.commentary.media.image}
-                      className="w-full h-full object-cover"
-                      alt=""
-                    />
-                  ) : (
-                    <video
-                      src={data.commentary.media.video}
-                      controls
-                      className="w-full h-full"
-                    />
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          )}
-
-          {/* MINDSET COLUMN */}
-          <div
-            className={`
-      w-full 
-      bg-stone-950 p-6 md:p-10 rounded-[3rem] border border-white/5 shadow-2xl
-      ${
-        hasMedia
-          ? "lg:col-span-3" // Take 3 columns if media is present
-          : "lg:col-span-5 max-w-4xl mx-auto" // Center and limit width if no media
-      }
-    `}
-          >
-            <Mindset commentary={data.commentary} onTermClick={openGlossary} />
-          </div>
-        </div>
-        );
-        {/* NAVIGATION & JUMP-TO */}
-        <div className="max-w-md mx-auto py-12">
+      {/* 4. NAVIGATION & JUMP-TO */}
+      <div className="relative bg-[#020202] border-t border-white/5 py-24">
+        <div className="max-w-xl mx-auto px-6 mb-24">
+          <h4 className="text-stone-500 text-[10px] font-black tracking-[0.4em] uppercase text-center mb-8">
+            Jump to Verse
+          </h4>
           <VerseSearch />
         </div>
-        <div className="pt-20 border-t border-white/5">
+
+        <div className="max-w-7xl mx-auto px-6 border-t border-white/5 pt-24">
           <VerseNavigation pagination={pagination} chapterId={chapterId} />
         </div>
       </div>

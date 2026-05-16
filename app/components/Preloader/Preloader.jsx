@@ -5,10 +5,10 @@ import { useGSAP } from "@gsap/react";
 
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const container = useRef();
-  const mantraRingInnerRef = useRef();
-  const mantraRingOuterRef = useRef();
-  const sunRef = useRef();
+  const container = useRef(null);
+  const sunRef = useRef(null);
+  const mantraRingInnerRef = useRef(null);
+  const mantraRingOuterRef = useRef(null);
 
   const bijaMantras = [
     "श्री",
@@ -37,13 +37,10 @@ export default function Preloader({ onComplete }) {
       .join("");
   };
 
+  // --- 1. Progress Timer Logic ---
   useEffect(() => {
-    // Check if user has already seen the full animation in this session
     const hasSeenFullLoader = sessionStorage.getItem("hasSeenFullLoader");
-
-    // If they've seen it, make it 8x faster (approx 0.5s total)
-    // If not, keep the sacred 4-second pace
-    const tickSpeed = hasSeenFullLoader ? 5 : 40;
+    const tickSpeed = hasSeenFullLoader ? 5 : 40; // 0.5s if seen, 4s if new
 
     const timer = setInterval(() => {
       setProgress((prev) => {
@@ -59,68 +56,106 @@ export default function Preloader({ onComplete }) {
     return () => clearInterval(timer);
   }, []);
 
+  // --- 2. Continuous Background Animations (Runs ONLY ONCE on mount) ---
   useGSAP(
     () => {
-      // Continuous rotations
+      // Smooth infinite rotations
       gsap.to(mantraRingInnerRef.current, {
         rotation: 360,
-        duration: 25,
+        duration: 30,
         repeat: -1,
         ease: "none",
       });
-      gsap.to(mantraRingOuterRef.current, {
-        rotation: -360,
-        duration: 45,
-        repeat: -1,
-        ease: "none",
-      });
+
       gsap.to(".counter-rotate", {
         rotation: -360,
-        duration: 25,
+        duration: 30,
         repeat: -1,
         ease: "none",
       });
+
+      gsap.to(mantraRingOuterRef.current, {
+        rotation: -360,
+        duration: 50,
+        repeat: -1,
+        ease: "none",
+      });
+
       gsap.to(".counter-rotate-outer", {
-        rotation: 40,
-        duration: 45,
+        rotation: 360,
+        duration: 50,
         repeat: -1,
         ease: "none",
       });
 
-      // Living Sun Heartbeat
-      if (progress > 0 && progress < 100) {
-        gsap.fromTo(
-          sunRef.current,
-          { scale: 1 },
-          {
-            scale: 1.08,
-            duration: 0.1,
-            yoyo: true,
-            repeat: 1,
-            ease: "power2.out",
-          },
-        );
-      }
+      // Deep, rhythmic heartbeat for the OM symbol
+      gsap.to(sunRef.current, {
+        scale: 1.15,
+        duration: 1.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
 
-      // Enlightenment Exit
+      // Breathing text at the bottom
+      gsap.to(".loading-text", {
+        opacity: 0.3,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    },
+    { scope: container },
+  );
+
+  // --- 3. Exit Animation (Runs ONLY when progress reaches 100) ---
+  useGSAP(
+    () => {
       if (progress === 100) {
-        const tl = gsap.timeline({ onComplete: () => onComplete() });
-        tl.to(".mandala-content", {
-          scale: 1.4,
-          opacity: 0,
-          filter: "blur(30px) brightness(2)",
-          duration: 1.2,
-          ease: "power2.in",
-        }).to(
-          ".loader-panel",
-          {
-            height: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "expo.inOut",
+        const tl = gsap.timeline({
+          onComplete: () => {
+            // Slight delay to ensure React state safely unmounts it
+            setTimeout(() => onComplete(), 50);
           },
-          "-=0.8",
-        );
+        });
+
+        // 1. Explode the mandala into light
+        tl.to(".mandala-content", {
+          scale: 2,
+          opacity: 0,
+          filter: "blur(20px) brightness(2)",
+          duration: 1.2,
+          ease: "power3.in",
+        })
+          // 2. Slide the literal "gates" open vertically
+          .to(
+            ".loader-panel-top",
+            {
+              yPercent: -100,
+              duration: 1.2,
+              ease: "expo.inOut",
+            },
+            "-=0.6",
+          )
+          .to(
+            ".loader-panel-bottom",
+            {
+              yPercent: 100,
+              duration: 1.2,
+              ease: "expo.inOut",
+            },
+            "-=1.2",
+          )
+          // 3. Fade out the overall container background
+          .to(
+            container.current,
+            {
+              autoAlpha: 0,
+              duration: 0.5,
+            },
+            "-=0.4",
+          );
       }
     },
     { scope: container, dependencies: [progress] },
@@ -129,24 +164,35 @@ export default function Preloader({ onComplete }) {
   return (
     <div
       ref={container}
-      className="fixed inset-0 z-[1000] flex items-center justify-center bg-stone-950 overflow-hidden"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#020202] overflow-hidden"
     >
-      <div className="loader-panel absolute top-0 left-0 w-full h-1/2 bg-[#050505] z-[10]" />
-      <div className="loader-panel absolute bottom-0 left-0 w-full h-1/2 bg-[#050505] z-[10]" />
+      {/* The Heavy Gates */}
+      <div className="loader-panel-top absolute top-0 left-0 w-full h-1/2 bg-[#050403] z-[10] border-b border-amber-500/10" />
+      <div className="loader-panel-bottom absolute bottom-0 left-0 w-full h-1/2 bg-[#050403] z-[10] border-t border-amber-500/10" />
 
+      {/* The Central Content */}
       <div className="mandala-content relative flex items-center justify-center z-[20]">
-        <div className="absolute w-[400px] h-[400px] rounded-full bg-orange-600/10 blur-[120px] animate-pulse" />
+        {/* Core Sun Glow */}
+        <div className="absolute w-[300px] h-[300px] rounded-full bg-amber-500/10 blur-[80px] pointer-events-none" />
 
-        <div ref={sunRef} className="relative z-30 text-center select-none">
-          <h2 className="text-8xl md:text-9xl font-serif bg-gradient-to-b from-yellow-100 via-orange-400 to-red-600 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(245,158,11,0.6)]">
+        {/* The OM & Percentage */}
+        <div
+          ref={sunRef}
+          className="relative z-30 text-center select-none flex flex-col items-center justify-center"
+        >
+          <h2 className="text-8xl md:text-9xl font-serif text-amber-400 drop-shadow-[0_0_40px_rgba(245,158,11,0.8)] leading-none">
             ॐ
           </h2>
-          <div className="mt-4 font-serif text-orange-500 font-bold text-3xl tracking-widest">
+          <div className="mt-4 font-serif text-amber-500/80 font-bold text-2xl tracking-[0.2em] w-24 text-center">
             {toSanskritNumber(progress)}%
           </div>
         </div>
 
-        <div ref={mantraRingInnerRef} className="absolute w-[450px] h-[450px]">
+        {/* Inner Ring (Bija Mantras) */}
+        <div
+          ref={mantraRingInnerRef}
+          className="absolute w-[350px] h-[350px] md:w-[450px] md:h-[450px]"
+        >
           {bijaMantras.map((mantra, i) => {
             const angle = i * (360 / bijaMantras.length);
             return (
@@ -155,9 +201,9 @@ export default function Preloader({ onComplete }) {
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <div
-                  className="counter-rotate font-serif text-2xl text-orange-400/80 font-medium drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]"
+                  className="counter-rotate font-serif text-xl md:text-2xl text-amber-500/60 font-medium drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]"
                   style={{
-                    transform: `rotate(${angle}deg) translate(190px) rotate(${-angle}deg)`,
+                    transform: `rotate(${angle}deg) translateY(-180px) rotate(${-angle}deg)`, // Moved logic to translateY for cleaner math
                   }}
                 >
                   {mantra}
@@ -167,7 +213,11 @@ export default function Preloader({ onComplete }) {
           })}
         </div>
 
-        <div ref={mantraRingOuterRef} className="absolute w-[800px] h-[800px]">
+        {/* Outer Ring (Long Shlokas) */}
+        <div
+          ref={mantraRingOuterRef}
+          className="absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px]"
+        >
           {longMantras.map((mantra, i) => {
             const angle = i * (360 / longMantras.length);
             return (
@@ -176,9 +226,9 @@ export default function Preloader({ onComplete }) {
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <div
-                  className="counter-rotate-outer font-serif text-sm md:text-base text-red-600/40 font-semibold tracking-widest whitespace-nowrap"
+                  className="counter-rotate-outer font-serif text-xs md:text-sm text-amber-600/30 font-bold tracking-[0.3em] whitespace-nowrap"
                   style={{
-                    transform: `rotate(${angle}deg) translate(340px) rotate(${-angle}deg)`,
+                    transform: `rotate(${angle}deg) translateY(-320px) rotate(${-angle}deg)`,
                   }}
                 >
                   {mantra}
@@ -189,7 +239,8 @@ export default function Preloader({ onComplete }) {
         </div>
       </div>
 
-      <p className="absolute bottom-12 z-[20] text-orange-950/40 font-black text-[10px] uppercase tracking-[1.2em]">
+      {/* Loading Footer */}
+      <p className="loading-text absolute bottom-12 z-[20] text-amber-500 font-black text-[10px] uppercase tracking-[1em] text-center w-full select-none">
         Aligning Consciousness
       </p>
     </div>

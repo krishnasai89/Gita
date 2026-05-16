@@ -1,72 +1,96 @@
 "use client";
-import { useRef } from "react";
-import gsap from "gsap";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Compass,
+  Shield,
+  Eye,
+  Flame,
+  Sword,
+  Crown,
+  User,
+  Target,
+  Sparkles,
+} from "lucide-react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const characters = [
   {
     name: "Shri Krishna",
     role: "The Divine Charioteer",
-    symbolism: "The Higher Intelligence / Para-Brahman",
-    desc: "The supreme teacher who does not fight but guides. He represents the inner voice of wisdom that remains stable amidst the chaos of the battlefield.",
-    color: "from-blue-500/20",
-    icon: "☸️",
+    symbolism: "The Higher Intelligence",
+    desc: "The supreme teacher who does not fight but guides. He represents the inner voice of wisdom that remains stable amidst chaos.",
+    icon: <Compass className="w-6 h-6 text-blue-400" />,
+    color: "from-blue-600/10",
+    shadow: "shadow-blue-500/10",
   },
   {
     name: "Arjuna",
     role: "The Seeking Warrior",
-    symbolism: "The Individual Soul / Jivatman",
-    desc: "The world-class archer who collapses under the weight of moral complexity. He represents every human who faces a crisis of identity and duty.",
-    color: "from-amber-500/20",
-    icon: "🏹",
+    symbolism: "The Individual Soul",
+    desc: "The world-class archer who collapses under moral complexity. He represents every human who faces a crisis of identity.",
+    icon: <Target className="w-6 h-6 text-amber-400" />,
+    color: "from-amber-600/10",
+    shadow: "shadow-amber-500/10",
   },
   {
     name: "Sanjaya",
     role: "The Divine Visionary",
-    symbolism: "The Objective Witness / Awareness",
-    desc: "Gifted with 'Divya-Drishti' (Divine Vision) by Vyasa, he narrates the war to the blind king. He represents the ability to see reality without bias.",
-    color: "from-stone-500/20",
-    icon: "👁️",
+    symbolism: "The Objective Witness",
+    desc: "Gifted with 'Divya-Drishti' (Divine Vision), he narrates reality without bias. He represents pure, non-judgmental awareness.",
+    icon: <Eye className="w-6 h-6 text-stone-400" />,
+    color: "from-stone-600/10",
+    shadow: "shadow-stone-500/10",
   },
   {
     name: "Dhritarashtra",
     role: "The Blind King",
-    symbolism: "The Bound Ego / Attachment",
-    desc: "Physically and spiritually blind, he is the father of the Kauravas. He represents the mind blinded by attachment to its own creations and desires.",
-    color: "from-red-500/20",
-    icon: "👑",
+    symbolism: "The Bound Ego",
+    desc: "Physically and spiritually blind, he represents a mind blinded by attachment to its own creations and selfish desires.",
+    icon: <Crown className="w-6 h-6 text-red-400" />,
+    color: "from-red-600/10",
+    shadow: "shadow-red-500/10",
   },
   {
     name: "Bhīṣma",
     role: "The Grandsire",
-    symbolism: "Ancient Tradition / Vows",
-    desc: "The invincible patriarch who is bound by a vow to protect the throne, even if it is held by evil. He represents the weight of old habits and outdated traditions that we struggle to let go of.",
-    color: "from-stone-500/20",
-    icon: "🛡️",
+    symbolism: "Ancient Tradition",
+    desc: "Invincible patriarch bound by a vow. He represents the weight of outdated traditions that we struggle to transcend.",
+    icon: <Shield className="w-6 h-6 text-stone-400" />,
+    color: "from-stone-600/10",
+    shadow: "shadow-stone-500/10",
   },
   {
     name: "Droṇācārya",
     role: "The Royal Teacher",
-    symbolism: "Acquired Knowledge / Skill",
-    desc: "The master of arms who taught both sides. He represents our skills and intellectual talents that can unfortunately be used to serve the ego if we aren't careful.",
-    color: "from-amber-700/20",
-    icon: "🏹",
+    symbolism: "Acquired Skill",
+    desc: "The master of arms. He represents intellectual talents and skills that can unfortunately be used to serve the ego.",
+    icon: <User className="w-6 h-6 text-amber-700" />,
+    color: "from-amber-900/10",
+    shadow: "shadow-amber-700/10",
   },
   {
     name: "Duryodhana",
     role: "The Crown Prince",
-    symbolism: "Greed / Unbridled Desire",
-    desc: "The eldest Kaurava who is consumed by jealousy. He represents the 'Desire-Mind' that believes it owns the world and will destroy anything to keep its power.",
-    color: "from-red-900/40",
-    icon: "🔥",
+    symbolism: "Unbridled Desire",
+    desc: "Consumed by jealousy, he represents the 'Desire-Mind' that will destroy anything to maintain its perceived power.",
+    icon: <Flame className="w-6 h-6 text-red-600" />,
+    color: "from-red-900/20",
+    shadow: "shadow-red-900/20",
   },
   {
-    name: "Kauravas & Pandavas",
-    role: "Inner Conflict",
-    symbolism: "Adharma vs Dharma",
-    desc: "The mind’s battle between ego-driven impulses and disciplined virtue.",
-    color: "from-indigo-500/20",
-    icon: "⚔️",
+    name: "Pandavas",
+    role: "The Virtue Collective",
+    symbolism: "Dharma",
+    desc: "The five brothers representing various aspects of virtue: Truth, Strength, Patience, Wisdom, and Beauty.",
+    icon: <Sword className="w-6 h-6 text-indigo-400" />,
+    color: "from-indigo-600/10",
+    shadow: "shadow-indigo-500/10",
   },
 ];
 
@@ -76,73 +100,120 @@ export default function Characters() {
   useGSAP(
     () => {
       gsap.from(".char-card", {
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
+        opacity: 1,
+        y: 40,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ".char-grid",
-          start: "top 100%",
+          start: "top 85%",
         },
       });
     },
-    { scope: container }
+    { scope: container },
   );
+
+  const handleMouseMove = (e, card) => {
+    const { left, top, width, height } = card.getBoundingClientRect();
+    const x = (e.clientX - left) / width;
+    const y = (e.clientY - top) / height;
+
+    const moveX = (x - 0.5) * 15;
+    const moveY = (y - 0.5) * -15;
+
+    gsap.to(card, {
+      rotateY: moveX,
+      rotateX: moveY,
+      duration: 0.5,
+      ease: "power2.out",
+      transformPerspective: 1000,
+    });
+  };
+
+  const handleMouseLeave = (card) => {
+    gsap.to(card, {
+      rotateY: 0,
+      rotateX: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  };
 
   return (
     <section
       ref={container}
-      id="characters"
-      className="bg-stone-950 py-32 px-6 overflow-hidden"
+      className="relative bg-[#0a0a0a] py-32 px-6 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* BACKGROUND DECOR */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* HEADER */}
-        <div className="text-center mb-24">
-          <h2 className="text-5xl font-serif text-amber-500 mb-6 tracking-tight">
-            Voices of Kurukshetra
+        <div className="flex flex-col items-center mb-24 text-center">
+          <div className="flex items-center gap-2 text-amber-500/60 mb-4 tracking-[0.5em] text-[10px] font-bold uppercase">
+            <Sparkles size={14} /> The Archetypes
+          </div>
+          <h2 className="text-5xl md:text-6xl font-serif text-white mb-6 leading-tight">
+            Voices of <span className="italic text-amber-500">Kurukshetra</span>
           </h2>
-          <p className="text-stone-500 text-xs tracking-[0.5em] uppercase font-bold">
-            The Eternal Dialogue of the Self
+          <p className="max-w-xl text-stone-500 text-sm leading-relaxed">
+            Every character on the battlefield represents a specific faculty of
+            the human psyche. The war is not external; it is the eternal
+            dialogue of the Self.
           </p>
         </div>
 
         {/* CHARACTERS GRID */}
-        <div className="char-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="char-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {characters.map((char, i) => (
             <div
               key={i}
-              className={`char-card group relative bg-stone-900/30 border border-white/5 p-10 h-[500px] flex flex-col justify-between overflow-hidden transition-all duration-500 hover:border-amber-500/40 rounded-xl`}
+              onMouseMove={(e) => handleMouseMove(e, e.currentTarget)}
+              onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
+              className={`char-card group relative bg-[#111] border border-white/5 p-8 h-[520px] flex flex-col transition-all duration-500 hover:border-amber-500/30 rounded-2xl overflow-hidden ${char.shadow} hover:shadow-2xl`}
             >
-              {/* Background Glow Overlay */}
+              {/* Dynamic Aura */}
               <div
-                className={`absolute inset-0 bg-gradient-to-b ${char.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+                className={`absolute inset-0 bg-gradient-to-br ${char.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
               />
 
-              <div className="relative z-10">
-                <div className="text-4xl mb-6">{char.icon}</div>
-                <h3 className="text-amber-500 text-[10px] font-black tracking-[0.4em] uppercase mb-2">
+              {/* TOP: ICON & ROLE */}
+              <div className="relative z-10 mb-8">
+                <div className="w-12 h-12 flex items-center justify-center bg-white/5 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                  {char.icon}
+                </div>
+                <h3 className="text-amber-500/80 text-[9px] font-mono tracking-[0.3em] uppercase mb-1">
                   {char.role}
                 </h3>
-                <h4 className="text-3xl font-serif text-stone-100 mb-4">
+                <h4 className="text-3xl font-serif text-stone-100 leading-none">
                   {char.name}
                 </h4>
-                <div className="w-8 h-px bg-amber-500/50 mb-6" />
-                <p className="text-stone-400 text-sm leading-relaxed font-light">
+              </div>
+
+              {/* MID: DESCRIPTION */}
+              <div className="relative z-10 flex-1">
+                <p className="text-stone-400 text-[13px] leading-relaxed font-light">
                   {char.desc}
                 </p>
               </div>
 
-              <div className="relative z-10 border-t border-white/5 pt-6">
-                <span className="text-[10px] text-stone-600 uppercase tracking-widest block mb-2 font-bold">
-                  Internal Symbolism
-                </span>
-                <p className="text-amber-500/80 text-xs font-serif italic">
-                  {char.symbolism}
-                </p>
-              </div>
-
-              {/* Decorative Accent */}
-              <div className="absolute -bottom-4 -right-4 text-9xl font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">
-                {char.name.charAt(0)}
+              {/* BOTTOM: SYMBOLISM */}
+              <div className="relative z-10 mt-auto pt-6 border-t border-white/5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[9px] text-stone-600 uppercase tracking-widest block mb-1 font-bold">
+                      Ontological Key
+                    </span>
+                    <p className="text-amber-200/90 text-sm font-serif italic">
+                      {char.symbolism}
+                    </p>
+                  </div>
+                  <div className="text-4xl font-serif text-white/[0.03] select-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                </div>
               </div>
             </div>
           ))}

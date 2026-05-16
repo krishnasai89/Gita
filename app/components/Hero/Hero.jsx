@@ -44,7 +44,7 @@ export default function Hero() {
       tl.fromTo(
         textRef.current,
         { opacity: 0, y: 100, scale: 0.8 },
-        { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: "power4.out" }
+        { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: "power4.out" },
       )
         .to(
           textRef.current,
@@ -54,7 +54,7 @@ export default function Hero() {
             duration: 3,
             ease: "none",
           },
-          "+=0.2"
+          "+=0.2",
         )
         .to(
           container.current,
@@ -63,13 +63,13 @@ export default function Hero() {
             duration: 1,
             ease: "power2.inOut",
           },
-          "-=1"
+          "-=1",
         );
 
       // Important: Refresh ScrollTrigger after animations are set
       ScrollTrigger.refresh();
     },
-    { scope: container }
+    { scope: container },
   );
 
   const toggleAudio = (e) => {
@@ -113,33 +113,51 @@ export default function Hero() {
         </video>
 
         {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 z-10" />
       </div>
 
       {/* TEXT LAYER */}
       <div className="relative z-10 flex h-full items-center justify-center pointer-events-none">
         <div ref={textRef} className="flex flex-col items-center opacity-0">
-          <h1 className="text-[15vw] font-serif font-black tracking-tighter text-amber-500 leading-none select-none">
-            GITA
-          </h1>
-          <p className="text-stone-400 tracking-[1em] uppercase text-xs mt-4 select-none">
-            The Song of God
+          <div className="hero-title relative">
+            {/* Sanskrit Subtle Glow */}
+            <span className="absolute -top-16 left-1/2 -translate-x-1/2 text-6xl md:text-8xl font-serif text-amber-500/40 select-none whitespace-nowrap">
+              श्रीमद् भगवद्गीता
+            </span>
+            <h1 className="text-[18vw] md:text-[14vw] font-serif font-black text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-500 to-amber-800 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] leading-none">
+              GITA
+            </h1>
+          </div>
+          <p className="text-stone-400 text-sm mt-4 select-none leading-relaxed tracking-[1mm] italic">
+            “Beyond the clamor of the battlefield, lies the song of the eternal
+            soul.”
           </p>
         </div>
       </div>
 
       {/* FIXED AUDIO CONTROL */}
       <button
-        onClick={toggleAudio}
-        className="fixed bottom-10 right-10 z-[100] p-4 rounded-full border border-amber-500/30 bg-stone-900/80 backdrop-blur-xl text-amber-500 hover:scale-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]"
-        aria-label="Toggle Mute"
+        onClick={() => {
+          if (videoRef.current) {
+            videoRef.current.muted = !isMuted;
+            setIsMuted(!isMuted);
+            videoRef.current.volume = 0.5;
+          }
+        }}
+        className="fixed bottom-10 right-10 z-[100] flex items-center gap-3 px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:bg-amber-500 hover:text-black transition-all duration-500 group overflow-hidden"
       >
-        {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+        <span className="text-[10px] uppercase tracking-widest font-bold hidden md:block">
+          {isMuted ? "Unmute Experience" : "Mute Sound"}
+        </span>
+        {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
       </button>
 
       {/* SCROLL INDICATOR */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-        <div className="w-px h-12 bg-gradient-to-b from-amber-500/50 to-transparent animate-ping" />
+        <span className="text-[10px] uppercase tracking-[0.4em] text-stone-500">
+          Scroll to Begin
+        </span>
+        <div className="w-[1px] h-16 bg-gradient-to-b from-amber-500 via-amber-500/20 to-transparent" />{" "}
       </div>
     </section>
   );

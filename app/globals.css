@@ -6,8 +6,9 @@
 
 /* 2. Base Styles */
 body {
-  font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman",
-    Times, serif;
+  font-family:
+    var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times,
+    serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,4 +25,41 @@ h4,
 }
 .ease-expo {
   transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Required Lenis Boilerplate */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* --- CUSTOM SLEEK SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 8px; /* Thin scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Or match your app's background color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46; /* Tailwind stone-700 color */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box; /* Creates a nice padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a; /* Lighter on hover */
 }

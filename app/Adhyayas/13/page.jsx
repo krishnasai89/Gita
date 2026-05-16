@@ -3,151 +3,251 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Search, ShieldCheck, User, Layers, Eye } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import {
+  Eye,
+  User,
+  Layers,
+  Brain,
+  Wind,
+  ArrowRight,
+  ArrowLeft,
+  Hexagon,
+  Sparkles,
+} from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const fieldComponents = [
+  {
+    id: "elements",
+    name: "5 Gross Elements",
+    desc: "Earth, Water, Fire, Air, and Space. The physical building blocks of the universe.",
+    icon: <Hexagon size={20} />,
+  },
+  {
+    id: "senses",
+    name: "10 Senses",
+    desc: "The five senses of perception (eyes, ears, etc.) and five organs of action.",
+    icon: <Eye size={20} />,
+  },
+  {
+    id: "mind",
+    name: "Mind & Intellect",
+    desc: "The internal instruments. The processor of data (mind) and the decision maker (intellect).",
+    icon: <Brain size={20} />,
+  },
+  {
+    id: "ego",
+    name: "The Ego (Ahamkāra)",
+    desc: "The false sense of 'I-ness' that claims ownership over the body and actions.",
+    icon: <User size={20} />,
+  },
+];
+
+const virtues = [
+  "Amanitvam (Humility)",
+  "Adambhitvam (Sincerity)",
+  "Ahimsā (Non-violence)",
+  "Kṣānti (Tolerance)",
+  "Ārjavam (Honesty)",
+  "Ācāryopāsanam (Service to Teacher)",
+  "Śaucam (Purity)",
+  "Sthairyam (Steadfastness)",
+  "Ātma-vinigrahaḥ (Self-control)",
+];
+
 export default function Adhyaya13() {
   const container = useRef(null);
   const [activeLayer, setActiveLayer] = useState(null);
 
-  const fieldComponents = [
-    {
-      id: "elements",
-      name: "5 Gross Elements",
-      desc: "Earth, Water, Fire, Air, and Space.",
-    },
-    {
-      id: "senses",
-      name: "10 Senses",
-      desc: "The five senses of perception and five organs of action.",
-    },
-    {
-      id: "mind",
-      name: "Mind & Intellect",
-      desc: "The internal instruments of thought and decision.",
-    },
-    {
-      id: "ego",
-      name: "The Ego",
-      desc: "Ahamkāra—the sense of 'I-ness' that claims ownership.",
-    },
-  ];
+  useGSAP(
+    () => {
+      // 1. Hero Reveal
+      gsap.fromTo(
+        ".hero-content",
+        { opacity: 0, y: 40, filter: "blur(10px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 1.5,
+          stagger: 0.2,
+          ease: "power3.out",
+        },
+      );
 
-  useEffect(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(
-      ".hero-title",
-      { opacity: 0, x: -50 },
-      { opacity: 1, x: 0, duration: 1.5, ease: "power4.out" }
-    );
+      // 2. Holographic Scanline
+      gsap.to(".scanline", {
+        y: "100vh",
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      });
 
-    // Stagger for the Anatomy cards
-    gsap.from(".anatomy-card", {
-      opacity: 0,
-      y: 40,
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: ".anatomy-grid",
-        start: "top 75%",
-      },
-    });
-  }, []);
+      // 3. Anatomy Cards Stagger
+      gsap.from(".anatomy-card", {
+        opacity: 1,
+        x: 50,
+        stagger: 0.15,
+        duration: 1,
+        ease: "back.out(1.5)",
+        scrollTrigger: {
+          trigger: ".anatomy-grid",
+          start: "top 70%",
+        },
+      });
+
+      // 4. Floating Virtues Marquee
+      gsap.to(".virtue-track", {
+        xPercent: -50,
+        duration: 30,
+        repeat: -1,
+        ease: "none",
+      });
+
+      // 5. Verse Grid
+      gsap.fromTo(
+        ".verse-node",
+        { opacity: 0, scale: 0.5 },
+        {
+          opacity: 1,
+          scale: 1,
+          stagger: { each: 0.02, from: "start" },
+          duration: 0.4,
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".verse-grid", start: "top 80%" },
+        },
+      );
+    },
+    { scope: container },
+  );
 
   return (
     <main
       ref={container}
-      className="bg-stone-950 min-h-screen selection:bg-emerald-500/30"
+      className="bg-[#030605] min-h-screen selection:bg-emerald-500/30 overflow-hidden font-sans"
     >
-      {/* 1. HERO SECTION: THE FIELD & THE KNOWER */}
-      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      {/* 1. HERO SECTION: THE HOLOGRAPHIC BLUEPRINT */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
+          {/* Blueprint Grid Background */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1)_0%,transparent_70%)]" />
+          <div className="scanline absolute top-0 left-0 w-full h-[2px] bg-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.8)]" />
+
           <img
-            src="/images/adhyaya13.jpg"
+            src="/images/adhyaya1.jpg"
             alt="The Field of Nature"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-10 mix-blend-luminosity grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-emerald-950/20 to-stone-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030605]/50 via-transparent to-[#030605]" />
         </div>
 
-        <div className="relative z-10 text-center px-6">
-          <p className="hero-title text-emerald-500 tracking-[0.8em] text-[10px] font-black uppercase mb-6">
-            Adhyāya 13
-          </p>
-          <h1 className="hero-title text-6xl md:text-9xl font-serif text-stone-100 mb-8">
-            Kṣetra <span className="text-emerald-400 italic">Vibhāga</span>
+        <div className="hero-content relative z-10 text-center px-6">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="h-px w-10 bg-emerald-500/40" />
+            <Layers size={14} className="text-emerald-500/80" />
+            <span className="text-emerald-500 tracking-[0.6em] text-[10px] font-black uppercase">
+              Adhyāya 13
+            </span>
+            <div className="h-px w-10 bg-emerald-500/40" />
+          </div>
+
+          <h1 className="text-6xl md:text-[8rem] font-serif text-white mb-6 relative drop-shadow-2xl">
+            <span className="absolute -top-16 left-1/2 -translate-x-1/2 text-emerald-500/10 text-[8rem] md:text-[14rem] whitespace-nowrap pointer-events-none select-none">
+              क्षेत्रक्षेत्रज्ञविभागयोग
+            </span>
+            Kṣetra <span className="italic text-emerald-400">Vibhāga</span>
           </h1>
-          <p className="hero-title text-stone-500 italic text-xl max-w-xl mx-auto font-light">
-            "This body is called the Field, and he who knows it is called the
-            Knower of the Field."
+
+          <p className="text-stone-400 text-xl md:text-2xl font-light italic tracking-widest max-w-3xl mx-auto leading-relaxed">
+            "The Yoga of discriminating the Field from the Knower of the Field."
           </p>
         </div>
       </section>
 
-      {/* 2. INTERACTIVE ANATOMY: THE COMPONENTS OF THE FIELD (VERSE 13.6-7) */}
-      <section className="py-32 px-6 anatomy-grid">
+      {/* 2. INTERACTIVE ANATOMY: THE 24 COMPONENTS (VERSES 13.6-7) */}
+      <section className="py-40 px-6 anatomy-grid relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h3 className="text-emerald-500 text-[10px] font-black tracking-[0.5em] uppercase mb-4">
+          <div className="text-center mb-24">
+            <h3 className="text-emerald-500/60 text-[10px] font-black tracking-[0.6em] uppercase mb-4">
               The Structure of Existence
             </h3>
-            <h2 className="text-4xl font-serif text-stone-100 italic">
-              The 24 Components of the "Field"
+            <h2 className="text-4xl md:text-6xl font-serif text-white">
+              The 24 Components of the Field
             </h2>
+            <div className="w-px h-16 bg-gradient-to-b from-emerald-500/50 to-transparent mx-auto mt-8" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* The Diagram Visual */}
-            <div className="relative aspect-square flex items-center justify-center">
-              <div className="absolute w-full h-full border border-emerald-500/10 rounded-full animate-[spin_20s_linear_infinite]" />
-              <div className="absolute w-[80%] h-[80%] border border-emerald-500/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* LEFT: The Holographic Diagram */}
+            <div className="lg:col-span-5 relative aspect-square flex items-center justify-center p-8">
+              {/* Outer Rings */}
+              <div className="absolute inset-0 border border-emerald-500/10 rounded-full animate-[spin_40s_linear_infinite]" />
+              <div className="absolute inset-8 border border-emerald-500/20 border-dashed rounded-full animate-[spin_30s_linear_infinite_reverse]" />
 
-              {/* Silhouette representing the body */}
+              {/* Core Body */}
               <div className="relative z-10 flex flex-col items-center">
-                <User size={120} className="text-stone-700 mb-4" />
-                <div className="bg-emerald-500/10 border border-emerald-500/40 px-6 py-2 rounded-full backdrop-blur-md">
-                  <span className="text-emerald-400 font-serif tracking-widest uppercase text-xs">
-                    Kṣetra (The Field)
-                  </span>
-                </div>
+                <User
+                  size={180}
+                  strokeWidth={1}
+                  className={`transition-colors duration-700 ${activeLayer ? "text-emerald-500/30" : "text-stone-700"}`}
+                />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-emerald-500/10 rounded-full blur-3xl opacity-50" />
               </div>
 
-              {/* Floating Observer Eye representing the Soul */}
-              <div className="absolute -top-10 right-10 flex flex-col items-center group">
-                <div className="w-16 h-16 bg-white/5 border border-white/20 rounded-full flex items-center justify-center text-white mb-2 group-hover:bg-emerald-500 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                  <Eye size={24} />
+              {/* Dynamic Highlights based on Hover */}
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ${activeLayer === "mind" ? "opacity-100" : "opacity-0"}`}
+              >
+                <Brain
+                  size={60}
+                  className="absolute top-[20%] left-1/2 -translate-x-1/2 text-emerald-400 animate-pulse"
+                />
+              </div>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ${activeLayer === "ego" ? "opacity-100" : "opacity-0"}`}
+              >
+                <div className="absolute top-[35%] left-1/2 -translate-x-1/2 w-16 h-16 border-2 border-amber-500/50 rounded-full animate-ping" />
+              </div>
+
+              {/* The Knower (Observer Eye) */}
+              <div className="absolute -top-4 -right-4 flex flex-col items-center group cursor-help">
+                <div className="w-20 h-20 bg-[#030605] border border-emerald-500/40 rounded-full flex items-center justify-center text-emerald-400 mb-3 shadow-[0_0_30px_rgba(16,185,129,0.2)] group-hover:bg-emerald-500 group-hover:text-black transition-all duration-500">
+                  <Eye size={32} />
                 </div>
-                <span className="text-[10px] text-white font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
-                  The Knower
+                <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-[0.3em]">
+                  Kṣetrajña
                 </span>
               </div>
             </div>
 
-            {/* Component Cards */}
-            <div className="grid grid-cols-1 gap-4">
+            {/* RIGHT: Component Cards */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {fieldComponents.map((item) => (
                 <div
                   key={item.id}
                   onMouseEnter={() => setActiveLayer(item.id)}
                   onMouseLeave={() => setActiveLayer(null)}
-                  className={`p-8 rounded-2xl border transition-all duration-500 cursor-help ${
+                  className={`anatomy-card p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 cursor-crosshair flex flex-col ${
                     activeLayer === item.id
-                      ? "bg-emerald-950/40 border-emerald-500 translate-x-4"
-                      : "bg-stone-900/40 border-white/5"
+                      ? "bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_30px_rgba(16,185,129,0.15)] -translate-y-2"
+                      : "bg-stone-900/30 border-white/5 hover:border-white/10"
                   }`}
                 >
-                  <h4
-                    className={`font-serif text-xl mb-2 transition-colors ${
-                      activeLayer === item.id
-                        ? "text-emerald-400"
-                        : "text-stone-300"
-                    }`}
+                  <div
+                    className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-colors duration-500 ${activeLayer === item.id ? "bg-emerald-500 text-black" : "bg-emerald-500/10 text-emerald-500"}`}
                   >
+                    {item.icon}
+                  </div>
+                  <h4 className="font-serif text-2xl mb-3 text-white">
                     {item.name}
                   </h4>
-                  <p className="text-stone-500 text-sm leading-relaxed">
+                  <p className="text-stone-400 text-sm leading-relaxed font-light">
                     {item.desc}
                   </p>
                 </div>
@@ -157,49 +257,62 @@ export default function Adhyaya13() {
         </div>
       </section>
 
-      {/* 3. THE DEFINITION OF KNOWLEDGE (VERSE 13.8-12) */}
-      <section className="py-32 px-6 border-y border-white/5 bg-emerald-950/[0.02]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-emerald-500 text-[10px] font-black tracking-[0.4em] uppercase mb-12">
-            True Jñāna (Wisdom)
+      {/* 3. THE DEFINITION OF KNOWLEDGE (VERSES 13.8-12) */}
+      <section className="py-32 border-y border-white/5 bg-[#010302] overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center px-6 mb-16 relative z-10">
+          <Sparkles className="text-emerald-500/40 mx-auto mb-8" size={32} />
+          <h2 className="text-emerald-500 text-[10px] font-black tracking-[0.5em] uppercase mb-8">
+            What is True Jñāna?
           </h2>
-          <p className="text-2xl md:text-3xl font-serif text-stone-200 leading-relaxed italic mb-12">
-            "Humility, unpretentiousness, non-violence, forgiveness,
-            uprightness, service to the teacher, purity, and steadfastness—this
-            is declared to be Knowledge."
+          <p className="text-3xl md:text-4xl font-serif text-stone-200 leading-relaxed italic">
+            "Knowledge is not the accumulation of facts. It is the purification
+            of character. All else is ignorance."
           </p>
+        </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            <span className="px-4 py-2 bg-stone-900 border border-white/5 rounded-full text-stone-500 text-[10px] uppercase font-bold tracking-widest">
-              Amanitvam (Humility)
-            </span>
-            <span className="px-4 py-2 bg-stone-900 border border-white/5 rounded-full text-stone-500 text-[10px] uppercase font-bold tracking-widest">
-              Ahimsā (Non-violence)
-            </span>
-            <span className="px-4 py-2 bg-stone-900 border border-white/5 rounded-full text-stone-500 text-[10px] uppercase font-bold tracking-widest">
-              Shaucam (Purity)
-            </span>
+        {/* Endless Marquee of Virtues */}
+        <div className="relative w-full flex overflow-hidden py-10 opacity-70 hover:opacity-100 transition-opacity">
+          <div className="virtue-track flex gap-8 whitespace-nowrap px-4">
+            {[...virtues, ...virtues].map((v, i) => (
+              <div
+                key={i}
+                className="px-8 py-4 bg-emerald-950/20 border border-emerald-500/20 rounded-full flex items-center gap-4"
+              >
+                <div className="w-2 h-2 rounded-full bg-emerald-500/50" />
+                <span className="text-stone-300 font-serif text-xl tracking-wide">
+                  {v}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. VERSE GRID (35 SHLOKAS) */}
-      <section className="py-32 px-6">
+      {/* 4. VERSE MATRIX: THE DATA NODES (35 SHLOKAS) */}
+      <section className="py-40 px-6 verse-grid">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h2 className="text-4xl font-serif text-stone-100">35 Shlokas</h2>
-            <p className="text-stone-600 text-xs uppercase tracking-[0.3em] font-bold mt-2">
-              The Field & The Knower Index
-            </p>
+          <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
+            <div className="text-left">
+              <h2 className="text-5xl font-serif text-white mb-6">
+                35 Units of Analysis
+              </h2>
+              <p className="text-stone-500 text-sm tracking-[0.3em] uppercase font-bold max-w-md leading-relaxed">
+                Deconstruct the illusion verse by verse.
+              </p>
+            </div>
+            <div className="text-emerald-600/10 text-[12rem] font-black select-none leading-none">
+              13
+            </div>
           </div>
-          <div className="grid grid-cols-4 sm:grid-cols-7 md:grid-cols-12 gap-3">
+
+          <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-12 gap-3">
             {Array.from({ length: 35 }, (_, i) => (
               <Link
                 key={i}
-                href={`/chapter/13/verse/${i + 1}`}
-                className="aspect-square bg-stone-900/30 border border-white/5 flex items-center justify-center hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
+                href={`/shlokas/chapter13/verse${i + 1}`}
+                className="verse-node aspect-square bg-stone-900/30 border border-white/5 flex items-center justify-center transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] hover:scale-110 group rounded-lg"
               >
-                <span className="text-stone-600 group-hover:text-emerald-400 font-serif text-xl">
+                <span className="text-stone-600 group-hover:text-black font-mono text-lg transition-colors">
                   {i + 1}
                 </span>
               </Link>
@@ -208,20 +321,43 @@ export default function Adhyaya13() {
         </div>
       </section>
 
-      {/* 5. NEXT CHAPTER */}
-      <section className="py-40 text-center border-t border-white/5 bg-gradient-to-b from-stone-950 to-emerald-950/10">
-        <Link href="/Adhyayas/14" className="group">
-          <span className="text-[10px] text-stone-700 uppercase tracking-[0.6em] mb-4 block">
-            The Three Forces of Nature
-          </span>
-          <h4 className="text-4xl md:text-5xl font-serif text-stone-400 group-hover:text-emerald-400 transition-colors">
-            Adhyāya 14: Guṇatraya Vibhāga Yoga →
-          </h4>
-          <p className="text-stone-700 italic mt-4">
-            Understanding the three modes of material nature.
-          </p>
-        </Link>
-      </section>
+      {/* 5. NEXT CHAPTER FOOTER */}
+      <footer className="py-48 text-center border-t border-white/5 bg-gradient-to-b from-[#030605] to-[#010a06] relative overflow-hidden">
+        <div className="max-w-5xl mx-auto flex flex-col items-center relative z-10">
+          <div className="w-px h-32 bg-gradient-to-b from-emerald-500/50 to-transparent mb-12" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 w-full">
+            <Link
+              href="/Adhyayas/12"
+              className="group flex flex-col items-center gap-4 opacity-50 hover:opacity-100 transition-all"
+            >
+              <ArrowLeft className="text-stone-500 group-hover:-translate-x-2 transition-transform" />
+              <span className="text-[10px] uppercase tracking-widest font-black text-stone-600">
+                The Preceding Path
+              </span>
+              <span className="font-serif italic text-2xl text-stone-400">
+                Bhakti Yoga
+              </span>
+            </Link>
+
+            <Link
+              href="/Adhyayas/14"
+              className="group flex flex-col items-center gap-4"
+            >
+              <ArrowRight className="text-emerald-500 group-hover:translate-x-2 transition-transform" />
+              <span className="text-[10px] uppercase tracking-[0.6em] font-black text-emerald-400">
+                Analyze the Matrix
+              </span>
+              <span className="font-serif italic text-3xl md:text-4xl text-white group-hover:text-emerald-400 transition-colors duration-700 mt-2">
+                Guṇatraya Vibhāga
+              </span>
+              <span className="text-stone-400 italic text-lg mt-4 group-hover:text-white transition-colors">
+                Understanding the Three Modes of Nature.
+              </span>
+            </Link>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

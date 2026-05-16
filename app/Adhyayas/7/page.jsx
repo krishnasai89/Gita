@@ -1,193 +1,267 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import Link from "next/link";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Link from "next/link";
+import {
+  Mountain,
+  Droplets,
+  Flame,
+  Wind,
+  Orbit,
+  Brain,
+  Zap,
+  User,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 import DevoteeCarousel from "@/app/components/DevoteeCarousel/DevoteeCarousel";
-import dynamic from "next/dynamic";
-
-const DivineResonanceCursor = dynamic(
-  () => import("../../components/DevoteeCarousel/DevoteeCarousel"),
-  {
-    ssr: false,
-    loading: () => <div className="opacity-0" />,
-  },
-);
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const elements = [
+  { name: "Earth", sanskrit: "Bhūmi", icon: <Mountain size={24} /> },
+  { name: "Water", sanskrit: "Apaḥ", icon: <Droplets size={24} /> },
+  { name: "Fire", sanskrit: "Analaḥ", icon: <Flame size={24} /> },
+  { name: "Air", sanskrit: "Vāyuḥ", icon: <Wind size={24} /> },
+  { name: "Space", sanskrit: "Kham", icon: <Orbit size={24} /> },
+  { name: "Mind", sanskrit: "Manaḥ", icon: <Brain size={24} /> },
+  { name: "Intellect", sanskrit: "Buddhi", icon: <Zap size={24} /> },
+  { name: "Ego", sanskrit: "Ahankāra", icon: <User size={24} /> },
+];
+
 export default function Adhyaya7() {
   const container = useRef(null);
   const particleContainer = useRef(null);
-  const textRef = useRef([]);
 
-  useEffect(() => {
-    // 1. Particle Universe Animation
-    const particles = [];
-    const particleCount = 40;
+  useGSAP(
+    () => {
+      // 1. Particle Creation
+      const particles = [];
+      const particleCount = 50;
 
-    for (let i = 0; i < particleCount; i++) {
-      const p = document.createElement("div");
-      p.className =
-        "absolute w-1 h-1 bg-emerald-500/30 rounded-full blur-[1px]";
-      particleContainer.current.appendChild(p);
-      particles.push(p);
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement("div");
+        p.className =
+          "absolute w-1 h-1 bg-emerald-500/20 rounded-full blur-[1px]";
+        particleContainer.current.appendChild(p);
 
-      gsap.set(p, {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
+        gsap.set(p, {
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          scale: Math.random() * 2,
+        });
+
+        gsap.to(p, {
+          y: "-=100",
+          x: `+=${Math.random() * 50 - 25}`,
+          opacity: 0,
+          duration: 5 + Math.random() * 5,
+          repeat: -1,
+          ease: "none",
+          delay: Math.random() * 5,
+        });
+      }
+
+      // 2. Hero Reveal
+      gsap.from(".hero-content", {
+        opacity: 1,
+        y: 40,
+        filter: "blur(10px)",
+        duration: 1.5,
+        ease: "power4.out",
       });
 
-      gsap.to(p, {
-        x: "+=" + (Math.random() * 200 - 100),
-        y: "+=" + (Math.random() * 200 - 100),
-        duration: 10 + Math.random() * 10,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
+      // 3. Elements Grid Stagger
+      gsap.from(".element-card", {
+        opacity: 1,
+        scale: 0.8,
+        y: 30,
+        stagger: 0.1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".elements-grid",
+          start: "top 80%",
+        },
       });
-    }
 
-    // 2. Text Reveal
-    const tl = gsap.timeline();
-    tl.fromTo(
-      textRef.current,
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 2, stagger: 0.3, ease: "expo.out" },
-    );
-  }, []);
+      // 4. Thread Animation
+      gsap.from(".pearl-thread", {
+        scaleY: 0,
+        transformOrigin: "top",
+        scrollTrigger: {
+          trigger: ".analogy-section",
+          start: "top center",
+          end: "bottom center",
+          scrub: 1,
+        },
+      });
+    },
+    { scope: container },
+  );
 
   return (
     <main
       ref={container}
-      className="bg-stone-950 min-h-screen selection:bg-emerald-500/30"
+      className="bg-[#050807] min-h-screen selection:bg-emerald-500/30 overflow-hidden"
     >
-      {/* 1. HERO SECTION: THE COSMIC SOURCE */}
-      <section className="relative h-screen w-full overflow-hidden">
-        {/* Particle Layer */}
+      {/* 1. HERO SECTION: THE SOURCE OF ALL */}
+      <section className="relative h-screen w-full flex items-center justify-center">
         <div
           ref={particleContainer}
-          className="absolute inset-0 z-0 opacity-60"
+          className="absolute inset-0 z-0 pointer-events-none"
         />
 
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 z-0 opacity-20">
           <img
-            src="/images/adhyaya7.jpg"
-            className="w-full h-full object-cover opacity-20"
+            src="/images/adhyaya1.jpg"
+            className="w-full h-full object-cover mix-blend-screen"
+            alt="Cosmic Background"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-emerald-950/10 to-stone-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050807] via-emerald-950/20 to-[#050807]" />
         </div>
 
-        <div className="relative h-full flex items-center justify-center text-center z-10 px-6">
-          <div className="space-y-6">
-            <p
-              ref={(el) => (textRef.current[0] = el)}
-              className="text-emerald-500 tracking-[0.6em] text-[10px] font-black uppercase"
-            >
+        <div className="hero-content relative z-10 text-center px-6">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="h-px w-10 bg-emerald-500/40" />
+            <span className="text-emerald-500 tracking-[0.5em] text-[10px] font-black uppercase">
               Adhyāya 07
-            </p>
-            <h1
-              ref={(el) => (textRef.current[1] = el)}
-              className="text-6xl md:text-9xl font-serif text-stone-100"
-            >
-              Jñāna <span className="text-emerald-400 italic">Vijñāna</span>
-            </h1>
-            <p
-              ref={(el) => (textRef.current[2] = el)}
-              className="text-stone-500 italic text-xl max-w-2xl mx-auto font-light leading-relaxed"
-            >
-              "Earth, water, fire, air, space, mind, intellect, and ego—these
-              are the eight-fold divisions of My nature."
-            </p>
+            </span>
+            <div className="h-px w-10 bg-emerald-500/40" />
           </div>
+          <h1 className="text-6xl md:text-[9rem] font-serif text-white mb-6 relative">
+            <span className="absolute -top-16 left-1/2 -translate-x-1/2 text-emerald-500/10 text-[10rem] md:text-[18rem] whitespace-nowrap pointer-events-none select-none">
+              ज्ञानविज्ञानयोग
+            </span>
+            Jñāna <span className="italic text-emerald-400">Vijñāna</span>
+          </h1>
+          <p className="text-stone-400 text-xl md:text-2xl font-light italic tracking-widest max-w-3xl mx-auto leading-relaxed">
+            "The Yoga of Knowledge and Wisdom — Where Science meets Spirit."
+          </p>
         </div>
       </section>
 
-      {/* 2. THE 8 ELEMENTS OF NATURE (VERSE 7.4) */}
-      <section className="py-32 px-6 border-y border-white/5 bg-emerald-950/5">
+      {/* 2. THE EIGHT-FOLD PRAKRITI (VERSE 7.4) */}
+      <section className="py-40 px-6 relative elements-grid">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-center text-amber-500 text-xs font-black tracking-[0.5em] uppercase mb-20">
-            The Eight-Fold Prakriti
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              "Earth",
-              "Water",
-              "Fire",
-              "Air",
-              "Space",
-              "Mind",
-              "Intellect",
-              "Ego",
-            ].map((element, i) => (
+          <div className="text-center mb-24">
+            <h2 className="text-emerald-500 text-[10px] font-black tracking-[0.6em] uppercase mb-4">
+              The Manifested Nature
+            </h2>
+            <h3 className="text-4xl font-serif text-white italic">
+              The Eight Divisions
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {elements.map((el, i) => (
               <div
                 key={i}
-                className="group border border-white/5 p-8 text-center hover:bg-emerald-500/5 hover:border-emerald-500/20 transition-all rounded-xl"
+                className="element-card group relative p-10 bg-emerald-950/5 border border-white/5 rounded-3xl transition-all duration-500 hover:border-emerald-500/30 hover:bg-emerald-950/10"
               >
-                <span className="text-emerald-500/20 group-hover:text-emerald-500 transition-colors font-serif text-3xl block mb-2">
-                  {i + 1}
-                </span>
-                <h3 className="text-stone-300 font-serif text-lg tracking-widest uppercase">
-                  {element}
-                </h3>
+                <div className="text-emerald-500/40 group-hover:text-emerald-400 mb-6 transition-colors duration-500">
+                  {el.icon}
+                </div>
+                <h4 className="text-white text-xl font-serif mb-1">
+                  {el.name}
+                </h4>
+                <p className="text-emerald-700 text-[10px] font-mono tracking-widest uppercase">
+                  {el.sanskrit}
+                </p>
+                <div className="absolute top-4 right-6 text-stone-900 font-serif text-4xl group-hover:text-emerald-500/10 transition-colors">
+                  0{i + 1}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. PARA & APARA PRAKRITI (VERSE 7.5) */}
-      <section className="py-32 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          <div className="reveal-text">
-            <h3 className="text-emerald-500 text-[10px] font-black tracking-[0.4em] uppercase mb-6">
-              Matter & Spirit
+      {/* 3. THE ANALOGY: PEARLS ON A THREAD (VERSE 7.7) */}
+      <section className="py-40 px-6 relative analogy-section overflow-hidden">
+        {/* Visual Pearl Thread Decor */}
+        <div className="pearl-thread absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[1px] bg-emerald-500/20 hidden lg:block" />
+
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="relative">
+            <h3 className="text-emerald-500 text-[10px] font-black tracking-[0.4em] uppercase mb-8">
+              The Infinite Connector
             </h3>
-            <h4 className="text-4xl font-serif text-stone-100 mb-8 leading-tight">
-              Beyond the <span className="text-emerald-400">Physical</span>
+            <h4 className="text-5xl md:text-6xl font-serif text-white mb-10 leading-tight">
+              A Thread <br />
+              <span className="text-emerald-400 italic">Between Worlds</span>
             </h4>
-            <p className="text-stone-400 leading-relaxed font-light text-lg">
-              Krishna explains that the 8 elements are his "lower" nature
-              (*Apara Prakriti*). But there is a "higher" nature (*Para
-              Prakriti*)—the life-force that sustains the entire universe.
+            <p className="text-stone-400 text-lg leading-relaxed font-light mb-10">
+              Krishna explains that material nature is but His lower energy. The
+              higher energy is the{" "}
+              <span className="text-emerald-200">consciousness</span> that
+              breathes life into the elements.
             </p>
+            <div className="flex items-center gap-4 text-emerald-500/60 font-mono text-xs uppercase tracking-widest">
+              <Sparkles size={16} /> Apara & Para Prakṛti
+            </div>
           </div>
 
-          <div className="relative p-10 bg-stone-900/40 border border-white/5 rounded-2xl italic font-serif text-stone-300 leading-relaxed">
-            <div className="text-amber-500/20 absolute -top-10 -left-4 text-9xl">
-              "
+          <div className="relative p-12 bg-stone-900/30 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] group">
+            <div className="absolute -top-10 -left-6 text-[12rem] text-emerald-500/5 font-serif pointer-events-none italic leading-none">
+              “
             </div>
-            "As a row of pearls is strung on a thread, so is all that exists
-            centered in Me, O Arjuna. I am the taste in water; I am the light in
-            the sun and the moon."
-            <p className="mt-8 text-emerald-600 text-[10px] tracking-[0.4em] uppercase font-bold text-right">
-              Verse 7.07-08
+            <p className="text-2xl font-serif text-stone-200 leading-relaxed italic relative z-10 mb-10">
+              "O Arjuna, there is nothing higher than Me. Everything in this
+              world is strung on Me, like rows of pearls upon a thread."
             </p>
+            <div className="flex items-center justify-between pt-8 border-t border-white/10">
+              <span className="text-emerald-600 text-[10px] font-black tracking-[0.4em] uppercase">
+                Verse 7.07
+              </span>
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1 h-1 rounded-full bg-emerald-500/30"
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
       <DevoteeCarousel />
 
-      {/* 4. VERSE NAVIGATOR (30 SHLOKAS) */}
-      <section className="py-32 px-6 border-t border-white/5">
+      {/* 4. VERSE MATRIX: THE JEWEL-CUT GRID */}
+      <section className="py-40 px-6 bg-[#040606]">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h2 className="text-4xl font-serif text-stone-100">30 Shlokas</h2>
-            <p className="text-stone-600 text-xs uppercase tracking-[0.3em] font-bold mt-2">
-              Knowledge & Realization Index
-            </p>
+          <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
+            <div className="text-left">
+              <h2 className="text-5xl font-serif text-white mb-6">
+                30 Revelations
+              </h2>
+              <p className="text-stone-500 text-sm tracking-[0.3em] uppercase font-bold max-w-md leading-relaxed">
+                Mapping the intersection of physical science and divine
+                awareness.
+              </p>
+            </div>
+            <div className="text-emerald-600/10 text-[12rem] font-black select-none leading-none">
+              07
+            </div>
           </div>
-          <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-10 gap-3">
+
+          <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-10 gap-4">
             {Array.from({ length: 30 }, (_, i) => (
               <Link
                 key={i}
-                href={`/chapter/07/verse/${i + 1}`}
-                className="aspect-square bg-stone-900/30 border border-white/5 flex items-center justify-center hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
+                href={`/shlokas/chapter7/verse${i + 1}`}
+                className="aspect-square bg-stone-900/20 border border-white/5 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 hover:bg-emerald-600 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-2 group"
               >
-                <span className="text-stone-600 group-hover:text-emerald-400 font-serif text-xl">
+                <span className="text-stone-500 group-hover:text-black font-serif text-2xl transition-colors">
                   {i + 1}
+                </span>
+                <span className="text-[7px] text-stone-800 group-hover:text-black/60 uppercase tracking-widest mt-1 font-bold">
+                  Vijñāna
                 </span>
               </Link>
             ))}
@@ -195,20 +269,27 @@ export default function Adhyaya7() {
         </div>
       </section>
 
-      {/* 5. NEXT CHAPTER */}
-      <section className="py-40 text-center border-t border-white/5">
-        <Link href="/Adhyayas/08" className="group">
-          <span className="text-[10px] text-stone-600 uppercase tracking-[0.6em] mb-4 block">
-            To the Eternal Beyond
-          </span>
-          <h4 className="text-4xl md:text-5xl font-serif text-stone-400 group-hover:text-emerald-500 transition-colors">
-            Adhyāya 08: Akṣara Brahma Yoga →
-          </h4>
-          <p className="text-stone-700 italic mt-2">
-            The path to the Imperishable Truth.
-          </p>
-        </Link>
-      </section>
+      {/* 5. NEXT CHAPTER FOOTER */}
+      <footer className="py-40 text-center border-t border-white/5 bg-gradient-to-b from-[#040606] to-[#061410]">
+        <div className="max-w-5xl mx-auto flex flex-col items-center">
+          <div className="w-px h-24 bg-emerald-500/50 mb-12" />
+          <Link href="/Adhyayas/8" className="group flex flex-col items-center">
+            <span className="text-[10px] text-stone-600 uppercase tracking-[0.8em] mb-4 group-hover:text-emerald-500 transition-colors">
+              Beyond the Imperishable
+            </span>
+            <h4 className="text-5xl md:text-7xl font-serif text-stone-400 group-hover:text-white transition-all duration-700">
+              Adhyāya 08: <span className="italic">Akṣara Brahma</span>
+            </h4>
+            <div className="mt-10 flex items-center gap-4 text-stone-600 group-hover:text-emerald-400 transition-colors">
+              <span className="text-sm italic">The path to the Absolute</span>
+              <ArrowRight
+                size={20}
+                className="group-hover:translate-x-2 transition-transform"
+              />
+            </div>
+          </Link>
+        </div>
+      </footer>
     </main>
   );
 }

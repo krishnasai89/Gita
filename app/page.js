@@ -19,6 +19,7 @@ export default function Home() {
         "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.",
     },
   };
+
   return (
     <main className="bg-black font-sans selection:bg-amber-500/30">
       <Hero />

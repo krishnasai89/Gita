@@ -2,87 +2,159 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function StarTrailCursor() {
+export default function DivineCursor() {
   const containerRef = useRef(null);
   const mouse = useRef({ x: 0, y: 0 });
+  const lastSpawn = useRef({ x: 0, y: 0 });
   const idleTimer = useRef(null);
   const pulseInterval = useRef(null);
 
-  // The specific mantras you requested
-  const mantras = [
+  // Short Seed (Bija) Mantras for the movement trail
+  const seedMantras = [
     "ॐ",
-    "श्री",
+    "श्रीं",
     "ह्रीं",
     "क्लीं",
     "गं",
-    "ॐ तत् सत्",
     "ऐं",
     "क्रीं",
     "हूं",
     "सौं",
-    "दुं",
-    "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे",
-    "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥",
   ];
-  const mantraIndex = useRef(0);
+
+  // Profound phrases for the deep meditation idle state
+  const profoundMantras = [
+    "ॐ तत् सत्",
+    "तत् त्वम् असि", // Tat Tvam Asi (Thou art that)
+    "अहं ब्रह्मास्मि", // Aham Brahmasmi (I am Brahman)
+    "प्रज्ञानं ब्रह्म", // Prajnanam Brahma (Consciousness is Brahman)
+  ];
+
+  const seedIndex = useRef(0);
+  const profoundIndex = useRef(0);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    // --- 1. RIPPLE (Sound Wave Vibration) ---
-    const createRipple = (x, y, isIdle = false) => {
-      const ripple = document.createElement("div");
-      ripple.className = `fixed rounded-full border ${
-        isIdle ? "border-amber-400/50 border-[3px]" : "border-amber-500/20"
-      } pointer-events-none z-[9998]`;
+    // --- 1. GOLDEN STARDUST (Replaces noisy ripples on movement) ---
+    const createDust = (x, y) => {
+      const dust = document.createElement("div");
+      dust.className =
+        "fixed rounded-full bg-amber-400 pointer-events-none z-[9998] mix-blend-screen";
 
-      gsap.set(ripple, {
-        width: 15,
-        height: 15,
+      gsap.set(dust, {
+        width: 4,
+        height: 4,
         x: x,
         y: y,
         xPercent: -50,
         yPercent: -50,
-        opacity: isIdle ? 0.8 : 0.4,
+        opacity: 0.6,
+        boxShadow: "0 0 10px 2px rgba(245, 158, 11, 0.6)",
       });
 
-      container.appendChild(ripple);
+      container.appendChild(dust);
 
-      gsap.to(ripple, {
-        width: isIdle ? 450 : 200,
-        height: isIdle ? 450 : 200,
+      gsap.to(dust, {
+        y: y - 20 - Math.random() * 30,
+        x: x + (Math.random() * 40 - 20),
         opacity: 0,
-        duration: isIdle ? 5 : 2.5,
-        ease: "power2.out",
-        onComplete: () => ripple.remove(),
+        scale: 0.1,
+        duration: 1 + Math.random(),
+        ease: "power1.out",
+        onComplete: () => dust.remove(),
       });
     };
 
-    // --- 2. MANTRA RELEASE (Vibrational Seeds) ---
-    const releaseMantra = (x, y, isBig = false) => {
+    // --- 2. THE MEDITATION PULSE (Idle State) ---
+    const createMeditationPulse = (x, y) => {
+      // The expanding energy ring
+      const ring = document.createElement("div");
+      ring.className =
+        "fixed rounded-full border border-amber-500/30 pointer-events-none z-[9997]";
+
+      gsap.set(ring, {
+        width: 100,
+        height: 100,
+        x: x,
+        y: y,
+        xPercent: -50,
+        yPercent: -50,
+        scale: 0,
+        opacity: 1,
+        boxShadow:
+          "inset 0 0 20px rgba(245, 158, 11, 0.2), 0 0 20px rgba(245, 158, 11, 0.2)",
+      });
+
+      container.appendChild(ring);
+
+      gsap.to(ring, {
+        scale: 4,
+        opacity: 0,
+        duration: 4,
+        ease: "sine.out",
+        onComplete: () => ring.remove(),
+      });
+
+      // The profound mantra
       const mantra = document.createElement("div");
+      mantra.innerText = profoundMantras[profoundIndex.current];
+      profoundIndex.current =
+        (profoundIndex.current + 1) % profoundMantras.length;
 
-      // Cycle through your mantras
-      mantra.innerText = mantras[mantraIndex.current];
-      mantraIndex.current = (mantraIndex.current + 1) % mantras.length;
-
-      mantra.className = `fixed text-amber-500 pointer-events-none z-[999] font-serif select-none transition-all`;
-
-      // Sacred glow effect
-      mantra.style.textShadow = isBig
-        ? "0 0 20px rgba(245, 158, 11, 0.8), 0 0 40px rgba(245, 158, 11, 0.4)"
-        : "0 0 10px rgba(245, 158, 11, 0.5)";
+      mantra.className =
+        "fixed text-amber-400/80 pointer-events-none z-[9999] font-serif tracking-widest whitespace-nowrap";
 
       gsap.set(mantra, {
         x: x,
         y: y,
         xPercent: -50,
         yPercent: -50,
-        fontSize: isBig ? "15px" : "7px",
+        fontSize: "1.2rem",
         opacity: 0,
-        scale: 0.3,
-        rotation: Math.random() * 10 - 5,
+        yOffset: 0,
+        textShadow: "0 0 20px rgba(245,158,11,0.5)",
+      });
+
+      container.appendChild(mantra);
+
+      gsap.to(mantra, {
+        opacity: 1,
+        y: y - 60,
+        duration: 2,
+        ease: "power2.out",
+      });
+
+      gsap.to(mantra, {
+        opacity: 0,
+        y: y - 100,
+        duration: 2,
+        delay: 2,
+        ease: "power2.in",
+        onComplete: () => mantra.remove(),
+      });
+    };
+
+    // --- 3. MANTRA SEEDS (Movement Trail) ---
+    const releaseSeed = (x, y) => {
+      const mantra = document.createElement("div");
+      mantra.innerText = seedMantras[seedIndex.current];
+      seedIndex.current = (seedIndex.current + 1) % seedMantras.length;
+
+      mantra.className =
+        "fixed text-amber-500 pointer-events-none z-[999] font-serif select-none mix-blend-screen";
+
+      gsap.set(mantra, {
+        x: x,
+        y: y,
+        xPercent: -50,
+        yPercent: -50,
+        fontSize: "12px",
+        opacity: 0,
+        scale: 0.5,
+        rotation: Math.random() * 20 - 10,
+        textShadow: "0 0 10px rgba(245, 158, 11, 0.4)",
       });
 
       container.appendChild(mantra);
@@ -90,34 +162,44 @@ export default function StarTrailCursor() {
       const tl = gsap.timeline({ onComplete: () => mantra.remove() });
 
       tl.to(mantra, {
-        opacity: isBig ? 1 : 0.7,
-        scale: 1,
-        duration: 0.6,
-        ease: "elastic.out(1, 0.5)",
+        opacity: 0.8,
+        scale: 1.2,
+        duration: 0.4,
+        ease: "back.out(2)",
       }).to(
         mantra,
         {
-          y: y - (isBig ? 180 : 100),
-          x: x + (Math.random() * 100 - 50),
-          rotation: Math.random() * 30 - 15,
+          y: y - 80 - Math.random() * 40,
+          x: x + (Math.random() * 60 - 30),
+          rotation: Math.random() * 60 - 30,
           opacity: 0,
-          duration: isBig ? 6 : 3.5,
+          scale: 0.5,
+          duration: 2 + Math.random(),
           ease: "sine.inOut",
         },
-        "-=0.1",
+        "-=0.2",
       );
     };
 
-    // --- 3. INTERACTION CONTROLLER ---
+    // --- 4. INTERACTION CONTROLLER ---
     const onMouseMove = (e) => {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
 
-      createRipple(e.clientX, e.clientY, false);
+      // Distance-based spawning (Ensures consistent trails regardless of mouse speed)
+      const dist = Math.hypot(
+        e.clientX - lastSpawn.current.x,
+        e.clientY - lastSpawn.current.y,
+      );
 
-      // Release a mantra seed occasionally while moving
-      if (Math.random() > 0.94) {
-        releaseMantra(e.clientX, e.clientY, false);
+      if (dist > 40) {
+        releaseSeed(e.clientX, e.clientY);
+        lastSpawn.current = { x: e.clientX, y: e.clientY };
+      }
+
+      // Spawn stardust more frequently
+      if (dist > 15) {
+        createDust(e.clientX, e.clientY);
       }
 
       // Reset Idle/Meditation Logic
@@ -126,15 +208,15 @@ export default function StarTrailCursor() {
       clearTimeout(idleTimer.current);
 
       idleTimer.current = setTimeout(() => {
-        // Deep Meditation Pulse
+        // Trigger immediate first pulse, then interval
+        createMeditationPulse(mouse.current.x, mouse.current.y);
         pulseInterval.current = setInterval(() => {
-          createRipple(mouse.current.x, mouse.current.y, true);
-          releaseMantra(mouse.current.x, mouse.current.y, true);
-        }, 3000); // Rhythmic 3-second heartbeat
-      }, 1200);
+          createMeditationPulse(mouse.current.x, mouse.current.y);
+        }, 4000); // Slow, breathing 4-second heartbeat
+      }, 1500); // Wait 1.5s of stillness before entering meditation mode
     };
 
-    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);

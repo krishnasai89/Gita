@@ -29,7 +29,7 @@ export default function ClientLayout({ children }) {
             : "opacity-100 transition-opacity duration-1000"
         }
       >
-        <SmoothScroll>
+        <SmoothScroll lerp={0.05} duration={1.5}>
           <StarTrailCursor />
           <Navbar onSearchClick={() => setIsSearchOpen(true)} />
           <SearchOverlay

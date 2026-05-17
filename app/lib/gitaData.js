@@ -59326,4 +59326,253 @@ export const gitaData = {
       },
     },
   },
+  "ch18-v73": {
+    sanskritText:
+      "अर्जुन उवाच | नष्टो मोहः स्मृतिर्लब्धा त्वत्प्रसादान्मयाच्युत | स्थितोऽस्मि गतसन्देहः करिष्ये वचनं तव || ७३ ||",
+    transliteration:
+      "arjuna uvāca | naṣṭo mohaḥ smṛtir labdhā tvat-prasādān mayācyuta | sthito 'smi gata-sandehaḥ kariṣye vacanaṁ tava || 73 ||",
+    englishTranslation:
+      "Arjuna said: My dear Krishna, O infallible one, my illusion is now gone. I have regained my memory by Your mercy. I am now firm and free from doubt and am prepared to act according to Your instructions.",
+    commentary: {
+      literal:
+        "Arjuna gives his final, definitive answer to Krishna's question from verse 72. He declares that his illusion has been completely destroyed (naṣṭo mohaḥ) and his true memory/awareness has been regained (smṛtir labdhā). He credits this entirely to Krishna's grace (tvat-prasādān mayācyuta). He is now perfectly steady (sthito 'smi) and completely free from all doubts (gata-sandehaḥ). His final resolution is absolute surrender: 'I will execute Your order' (kariṣye vacanaṁ tava).",
+      philosophical: {
+        insight: "The Return to Original Consciousness",
+        points: [
+          {
+            title: "Smṛtir Labdhā (Memory Regained)",
+            text: "Arjuna doesn't say he 'learned something new.' He says he 'regained his memory.' In Vedic philosophy, the soul is already inherently perfect and knows its relationship with God. Illusion (moha) is simply spiritual amnesia. The entire 700-verse Gita was not an act of indoctrination, but an act of remembering who we originally are.",
+          },
+        ],
+      },
+      psychological: {
+        points: [
+          {
+            title: "The Cure for Paralysis",
+            text: "In Chapter 1, Arjuna was crying, trembling, dropping his bow, and paralyzed by anxiety and doubt. Now, his mind is 'sthita' (firm) and 'gata-sandehaḥ' (doubtless). The external situation hasn't changed at all—the terrifying army is still standing in front of him. But his internal consciousness has shifted from ego-driven fear to divine alignment. True peace is an inside job.",
+          },
+        ],
+      },
+      modern: [
+        {
+          title: "The Ultimate Alignment",
+          text: "Modern therapy often aims to help us 'find our truth.' The Gita teaches that our ultimate truth is aligning our individual will with the Supreme Will. 'Kariṣye vacanaṁ tava' (I will do Your will) is the ultimate release of the exhausting burden of trying to control the universe ourselves.",
+        },
+      ],
+      mindset: {
+        intro: "The shift in personal resolve:",
+        points: [
+          {
+            title: "Action",
+            text: "I am confused and paralyzed because I don't know what will happen to me -> I am steady and fearless because I am acting purely as an instrument of the Divine.",
+          },
+        ],
+      },
+      misinterpretations: {
+        myth: [
+          {
+            title: "Blind Obedience",
+            text: "Assuming Arjuna is acting like a brainwashed robot.",
+          },
+        ],
+        truth: [
+          {
+            title: "Conscious Alignment",
+            text: "Arjuna makes this statement immediately after Krishna explicitly told him 'deliberate on this fully, and do as you wish' (18.63). Arjuna's surrender is not a forceful overriding of his free will; it is the highest, most educated exercise of his free will.",
+          },
+        ],
+      },
+      inquiry: [
+        {
+          title: "Reflective Question",
+          text: "Have I reached a point in my life where I can drop my exhausting need to be in control and genuinely say to the Supreme, 'I am ready to act according to Your instructions'?",
+        },
+      ],
+    },
+  },
+  "ch18-v74": {
+    sanskritText:
+      "सञ्जय उवाच | इत्यहं वासुदेवस्य पार्थस्य च महात्मनः | संवादमिममश्रौषमद्भुतं रोमहर्षणम् || ७४ ||",
+    transliteration:
+      "sañjaya uvāca | ity ahaṁ vāsudevasya pārthasya ca mahātmanaḥ | saṁvādam imam aśrauṣam adbhutaṁ roma-harṣaṇam || 74 ||",
+    englishTranslation:
+      "Sañjaya said: Thus have I heard the conversation of two great souls, Kṛṣṇa and Arjuna. And so wonderful is that message that my hair is standing on end.",
+    commentary: {
+      literal:
+        "The perspective now shifts back to Sañjaya, the mystic visionary narrating the battle to the blind King Dhṛtarāṣṭra. Sañjaya concludes his narration by stating: 'Thus, I have heard (ity ahaṁ aśrauṣam) this conversation (saṁvādam) between Vāsudeva (Krishna) and the great-souled Pārtha (Arjuna).' He describes the conversation as profoundly wondrous and astonishing (adbhutaṁ), so much so that it causes his hair to stand on end in sheer ecstasy (roma-harṣaṇam).",
+      philosophical: {
+        insight: "The Perfect Hearer",
+        points: [
+          {
+            title: "Transmission of Grace",
+            text: "Sañjaya represents the perfect recipient of spiritual knowledge. He did not ask the questions, but simply by eavesdropping with a pure, non-envious heart, he achieved the exact same spiritual ecstasy as Arjuna. The power of the Gita is so absolute that it transforms anyone who simply listens with genuine devotion.",
+          },
+        ],
+      },
+      psychological: {
+        points: [
+          {
+            title: "Roma-harṣaṇam (Physical Ecstasy)",
+            text: "True spiritual realization is not just a dry, intellectual exercise. When the soul connects with the Absolute Truth, it creates a physiological reaction. The sheer awe and wonder of understanding the cosmos and God's love literally electrifies the nervous system.",
+          },
+        ],
+      },
+    },
+  },
+  "ch18-v75": {
+    sanskritText:
+      "व्यासप्रसादाच्छ्रुतवानेतद्गुह्यमहं परम् | योगं योगेश्वरात्कृष्णात्साक्षात्कथयतः स्वयम् || ७५ ||",
+    transliteration:
+      "vyāsa-prasādāc chrutavān etad guhyam ahaṁ param | yogaṁ yogeśvarāt kṛṣṇāt sākṣāt kathayataḥ svayam || 75 ||",
+    englishTranslation:
+      "By the mercy of Vyāsa, I have heard these most confidential talks directly from the master of all mysticism, Kṛṣṇa, who was speaking personally to Arjuna.",
+    commentary: {
+      literal:
+        "Sañjaya explains how he, sitting miles away in a palace, was able to hear a battlefield conversation. He credits it entirely to the mercy and grace of his spiritual master, Vyāsadeva (vyāsa-prasādāc). Through this mystic vision, he heard this supreme, confidential knowledge (etad guhyam ahaṁ param) regarding yoga directly (sākṣāt) from the ultimate master of all mysticism, Krishna Himself (yogeśvarāt kṛṣṇāt), as He was personally speaking it (kathayataḥ svayam).",
+      spiritual: {
+        insight: "The Principle of Parampara (Disciplic Succession)",
+        points: [
+          {
+            title: "The Transparent Medium",
+            text: "Sañjaya does not take credit for his amazing clairvoyant abilities. He immediately attributes his success to the grace of the Guru (Vyasa). In Vedic epistemology, you cannot access the Absolute Truth merely through your own blunt senses or intelligence. You need the 'prasāda' (grace) of a bona fide spiritual master to act as the lens through which you can perceive the Divine.",
+          },
+        ],
+      },
+      psychological: {
+        points: [
+          {
+            title: "The Antidote to Spiritual Pride",
+            text: "When we receive profound spiritual insights, the ego immediately tries to claim credit: 'Look how enlightened I am.' Sañjaya models perfect humility. True enlightenment is recognizing that you are just a grateful receiver of a transmission that originated far above you.",
+          },
+        ],
+      },
+    },
+  },
+  "ch18-v76": {
+    sanskritText:
+      "राजन्संस्मृत्य संस्मृत्य संवादमिममद्भुतम् | केशवार्जुनयोः पुण्यं हृष्यामि च मुहुर्मुहुः || ७६ ||",
+    transliteration:
+      "rājan saṁsmṛtya saṁsmṛtya saṁvādam imam adbhutam | keśavārjunayoḥ puṇyaṁ hṛṣyāmi ca muhur muhuḥ || 76 ||",
+    englishTranslation:
+      "O King, as I repeatedly recall this wondrous and holy dialogue between Kṛṣṇa and Arjuna, I take pleasure, being thrilled at every moment.",
+    commentary: {
+      literal:
+        "Sañjaya addresses King Dhṛtarāṣṭra (rājan). He states that as he continuously remembers and recalls over and over again (saṁsmṛtya saṁsmṛtya) this deeply wondrous (adbhutam) and supremely holy (puṇyaṁ) conversation between Keśava (Krishna) and Arjuna, he rejoices and is thrilled at every single moment, again and again (hṛṣyāmi ca muhur muhuḥ).",
+      philosophical: {
+        insight: "The Eternal Freshness of Transcendence",
+        points: [
+          {
+            title: "Beyond Diminishing Returns",
+            text: "In the material world, if you read a great book or watch a great movie, the thrill diminishes every time you replay it. Spiritual sound vibration acts inversely. The more you remember and recite the Gita (saṁsmṛtya saṁsmṛtya), the deeper the meaning becomes, and the fresher the joy feels (muhur muhuḥ). Transcendence has no expiration date.",
+          },
+        ],
+      },
+      modern: [
+        {
+          title: "The Power of Sacred Rumination",
+          text: "Modern psychology notes that rumination (repeatedly thinking about negative events) causes severe depression. Sañjaya is practicing 'sacred rumination.' By intentionally looping the divine conversation of the Gita in his mind, he generates continuous states of joy, overriding the anxiety of the war happening outside.",
+        },
+      ],
+      inquiry: [
+        {
+          title: "Reflective Question",
+          text: "What loops am I running in my mind? Am I 'saṁsmṛtya saṁsmṛtya' (repeatedly remembering) my past traumas and anxieties, or am I repeatedly remembering spiritual truths that elevate my consciousness?",
+        },
+      ],
+    },
+  },
+  "ch18-v77": {
+    sanskritText:
+      "तच्च संस्मृत्य संस्मृत्य रूपमत्यद्भुतं हरेः | विस्मयो मे महान्राजन्हृष्यामि च पुनः पुनः || ७७ ||",
+    transliteration:
+      "tac ca saṁsmṛtya saṁsmṛtya rūpam aty-adbhutaṁ hareḥ | vismayo me mahān rājan hṛṣyāmi ca punaḥ punaḥ || 77 ||",
+    englishTranslation:
+      "O King, as I remember the wonderful form of Lord Hari, I am struck with wonder more and more, and I rejoice again and again.",
+    commentary: {
+      literal:
+        "Sañjaya expresses his ultimate awe. Not only is he recalling the words, but he is also repeatedly remembering (tac ca saṁsmṛtya saṁsmṛtya) the incredibly astonishing and wondrous Universal Form (rūpam aty-adbhutaṁ) revealed by Lord Hari (Krishna in Chapter 11). Remembering this terrifyingly beautiful cosmic display strikes him with massive, overwhelming wonder (vismayo me mahān rājan) and causes him to rejoice again and again (hṛṣyāmi ca punaḥ punaḥ).",
+      philosophical: {
+        insight: "The Imprint of the Divine",
+        points: [
+          {
+            title: "The Final Subject of Meditation",
+            text: "The culmination of all spiritual knowledge in the Gita does not end in a formless void or an abstract concept of energy. It culminates in the breathtaking, personal form of the Supreme Lord. The highest ecstasy of the soul is found in contemplating the infinite beauty and majesty of God's form.",
+          },
+        ],
+      },
+      psychological: {
+        points: [
+          {
+            title: "Awe as a Healing Force",
+            text: "Psychologists have identified 'awe' as an emotion that immediately shrinks the ego and increases well-being. Sañjaya is experiencing the ultimate state of cosmic awe ('vismayo me mahān'). When the mind is filled with the infinite wonder of the Divine, there is simply no psychological space left for mundane anxiety.",
+          },
+        ],
+      },
+    },
+  },
+  "ch18-v78": {
+    sanskritText:
+      "यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः | तत्र श्रीर्विजयो भूतिर्ध्रुवा नीतिर्मतिर्मम || ७८ ||",
+    transliteration:
+      "yatra yogeśvaraḥ kṛṣṇo yatra pārtho dhanur-dharaḥ | tatra śrīr vijayo bhūtir dhruvā nītir matir mama || 78 ||",
+    englishTranslation:
+      "Wherever there is Kṛṣṇa, the master of all mystics, and wherever there is Arjuna, the supreme archer, there will also certainly be opulence, victory, extraordinary power, and morality. That is my opinion.",
+    commentary: {
+      literal:
+        "This is the final, concluding verse of the Bhagavad Gita. Sañjaya delivers his ultimate verdict to the blind King Dhṛtarāṣṭra (who was hoping his sons would win the war). Sañjaya destroys the King's hopes with a cosmic formula: Wherever there is Krishna, the Supreme Master of all Yoga/Mysticism (yatra yogeśvaraḥ kṛṣṇo), AND wherever there is Arjuna, the dynamic archer (yatra pārtho dhanur-dharaḥ), in that exact place (tatra), four things are absolutely guaranteed to exist (dhruvā): wealth/opulence (śrīr), complete victory (vijayo), extraordinary power (bhūtir), and flawless morality/justice (nītir). Sañjaya concludes: 'This is my firm opinion' (matir mama).",
+      philosophical: {
+        insight: "The Formula for Ultimate Success",
+        points: [
+          {
+            title: "The Perfect Synergy",
+            text: "This verse is the summary of human existence. Success is not achieved by God acting alone, nor by humanity acting alone. If Arjuna just prayed and dropped his bow, nothing would happen. If Arjuna fought without Krishna, he would be destroyed by karma. The absolute formula for victory is the synergy of Divine Grace (Krishna the guide) combined with flawless, dynamic human endeavor (Arjuna armed with his bow). God provides the vision; we provide the action.",
+          },
+        ],
+      },
+      spiritual: {
+        insight: "The Ultimate Guarantee",
+        points: [
+          {
+            title: "Morality Always Wins",
+            text: "Dhṛtarāṣṭra represents the blind, grasping ego trying to hoard wealth and power through immoral means. Sañjaya's final warning is clear: true opulence, victory, and power only permanently reside where there is 'nītir' (morality/dharma) and God. Any victory won without God and morality is an illusion and will quickly turn to ashes.",
+          },
+        ],
+      },
+      modern: [
+        {
+          title: "The Two Halves of Achievement",
+          text: "Many people swing between two extremes: 'I will manifest success purely by my own grind' (Atheistic endeavor) or 'God will fix everything, I don't have to work' (Lazy spirituality). The Gita ends by rejecting both. Hold your bow. Sharpen your arrows. Do the hard work. But ensure your chariot is being driven by the Supreme. That is the only path to guaranteed, sustainable victory.",
+        },
+      ],
+      mindset: {
+        intro: "The ultimate shift in approaching life:",
+        points: [
+          {
+            title: "Paradigm",
+            text: "I must choose between material success and spiritual surrender -> When my dynamic actions are perfectly aligned with the Supreme Will, material success, victory, and spiritual perfection naturally arise together.",
+          },
+        ],
+      },
+      misinterpretations: {
+        myth: [
+          {
+            title: "Victory means no pain",
+            text: "Assuming 'victory' means the war won't be difficult or involve loss.",
+          },
+        ],
+        truth: [
+          {
+            title: "The Ultimate Triumph",
+            text: "The Pandavas still suffered immense losses in the war. 'Vijayo' (Victory) here means the ultimate triumph of Dharma (righteousness) and the soul's liberation, which supersedes temporary material discomfort.",
+          },
+        ],
+      },
+      inquiry: [
+        {
+          title: "Reflective Question",
+          text: "In the battlefield of my own life, have I remembered to invite the 'Master of Mystics' onto my chariot, or am I trying to fire all my arrows alone?",
+        },
+      ],
+    },
+  },
 };

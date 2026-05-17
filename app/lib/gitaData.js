@@ -59185,46 +59185,125 @@ export const gitaData = {
       },
     },
   },
-  "ch18-v68-69": {
+  "ch18-v68": {
     sanskritText:
-      "य इमं परमं गुह्यं मद्भक्तेष्वभिधास्यति | भक्तिं मयि परां कृत्वा मामेवैष्यत्यसंशयः || ६८ || न च तस्मान्मनुष्येषु कश्चिन्मे प्रियकृत्तमः | भविता न च मे तस्मादन्यः प्रियतरो भुवि || ६९ ||",
+      "य इमं परमं गुह्यं मद्भक्तेष्वभिधास्यति | भक्तिं मयि परां कृत्वा मामेवैष्यत्यसंशयः || ६८ ||",
     transliteration:
-      "ya imaṁ paramaṁ guhyaṁ mad-bhakteṣv abhidhāsyati | bhaktiṁ mayi parāṁ kṛtvā mām evaiṣyaty asaṁśayaḥ || 68 || na ca tasmān manuṣyeṣu kaścin me priya-kṛttamaḥ | bhavitā na ca me tasmād anyaḥ priyataro bhuvi || 69 ||",
+      "ya imaṁ paramaṁ guhyaṁ mad-bhakteṣv abhidhāsyati | bhaktiṁ mayi parāṁ kṛtvā mām evaiṣyaty asaṁśayaḥ || 68 ||",
     englishTranslation:
-      "For one who explains this supreme secret to the devotees, pure devotional service is guaranteed, and at the end he will come back to Me. There is no servant in this world more dear to Me than he, nor will there ever be one more dear.",
+      "For one who explains this supreme secret to the devotees, pure devotional service is guaranteed, and at the end he will come back to Me.",
     commentary: {
       literal:
-        "Krishna contrasts the previous restriction with the ultimate reward for sharing the message properly. Anyone who takes this supreme, confidential secret (imaṁ paramaṁ guhyaṁ) and explains it to those who are receptive and devoted (mad-bhakteṣv abhidhāsyati) is guaranteed to attain pure devotional service (bhaktiṁ mayi parāṁ kṛtvā) and will return to Krishna without any doubt (mām evaiṣyaty asaṁśayaḥ). Furthermore, Krishna declares that among all human beings (manuṣyeṣu), there is no one who does a more pleasing service (priya-kṛttamaḥ), nor will there ever be anyone on earth dearer to Him (priyataro bhuvi) than the one who shares this knowledge.",
-      spiritual: {
-        insight: "The Highest Service",
+        "Krishna reveals the ultimate reward for sharing the Bhagavad Gita. Anyone who takes this supreme, deeply confidential secret (imaṁ paramaṁ guhyaṁ) and actively explains it to those who are devoted and receptive (mad-bhakteṣv abhidhāsyati) is absolutely guaranteed to attain pure devotional service (bhaktiṁ mayi parāṁ kṛtvā). At the end of their life, they will return directly to Krishna without any doubt whatsoever (mām evaiṣyaty asaṁśayaḥ).",
+      philosophical: {
+        insight: "The Highest Welfare Work",
         points: [
           {
             title: "Distributing the Cure",
-            text: "If a doctor finds the cure for a terminal illness, the highest moral act is to distribute that cure to the dying. The material world is terminally infected with illusion and suffering. The Gita is the absolute cure. Therefore, sharing the wisdom of the Gita with sincere souls is considered the most heroic and intimately dear service one can render to the Supreme.",
+            text: "Providing food or money to a suffering person only cures their temporary bodily distress. But sharing the wisdom of the Gita cures the fundamental disease of material existence—ignorance. Therefore, distributing spiritual knowledge is considered the highest form of philanthropy, earning the ultimate spiritual reward.",
+          },
+        ],
+      },
+      psychological: {
+        points: [
+          {
+            title: "Teaching as the Ultimate Learning",
+            text: "Psychologically, the best way to internalize a complex truth is to teach it to someone else. When a person dedicates their life to explaining the Gita, their own mind becomes constantly absorbed in its wisdom, automatically propelling them to the highest stage of devotion.",
           },
         ],
       },
     },
   },
-  "ch18-v70-71": {
+  "ch18-v69": {
     sanskritText:
-      "अध्येष्यते च य इमं धर्म्यं संवादमावयोः | ज्ञानयज्ञेन तेनाहमिष्टः स्यामिति मे मतिः || ७० || श्रद्धावाननसूयश्च शृणुयादपि यो नरः | सोऽपि मुक्तः शुभाँल्लोकान्प्राप्नुयात्पुण्यकर्मणाम् || ७१ ||",
+      "न च तस्मान्मनुष्येषु कश्चिन्मे प्रियकृत्तमः | भविता न च मे तस्मादन्यः प्रियतरो भुवि || ६९ ||",
     transliteration:
-      "adhyeṣyate ca ya imaṁ dharmyaṁ saṁvādam āvayoḥ | jñāna-yajñena tenāham iṣṭaḥ syām iti me matiḥ || 70 || śraddhāvān anasūyaś ca śṛṇuyād api yo naraḥ | so 'pi muktaḥ śubhāḻ lokān prāpnuyāt puṇya-karmaṇām || 71 ||",
+      "na ca tasmān manuṣyeṣu kaścin me priya-kṛttamaḥ | bhavitā na ca me tasmād anyaḥ priyataro bhuvi || 69 ||",
     englishTranslation:
-      "And I declare that he who studies this sacred conversation of ours worships Me by his intelligence. And one who listens with faith and without envy becomes free from sinful reactions and attains to the auspicious planets where the pious dwell.",
+      "There is no servant in this world more dear to Me than he, nor will there ever be one more dear.",
     commentary: {
       literal:
-        "Krishna details the benefits for those who simply engage with the text. He declares that anyone who carefully studies (adhyeṣyate) this sacred conversation (dharmyaṁ saṁvādam) is actually worshiping Him through the sacrifice of knowledge (jñāna-yajñena iṣṭaḥ). This is His firm opinion (me matiḥ). Moreover, even a person who just listens to it (śṛṇuyād api), provided they have faith (śraddhāvān) and no envy (anasūyaś ca), is instantly freed from karmic sins (muktaḥ) and attains the auspicious, elevated planetary systems of the pious (śubhāḻ lokān).",
+        "Krishna makes a definitive and incredibly emotional statement about the messenger of His words. Among all human beings (manuṣyeṣu), there is no one who performs a more pleasing service to Him (na ca kaścin me priya-kṛttamaḥ) than the one who shares this knowledge. Furthermore, Krishna guarantees that there never will be anyone on earth dearer to Him (na ca me tasmād anyaḥ priyataro bhuvi) than such a person.",
+      spiritual: {
+        insight: "The Supreme Validation",
+        points: [
+          {
+            title: "The Postman of the Divine",
+            text: "Krishna does not say the person who meditates the longest is the most dear, or the person who builds the biggest temples. The most dear person is the one who acts as the transparent 'postman,' delivering Krishna's letter of love (the Gita) to the conditioned souls suffering in the material world. It is the intimacy of shared mission.",
+          },
+        ],
+      },
+      modern: [
+        {
+          title: "The Antidote to Insignificance",
+          text: "Many people struggle with feeling insignificant, wondering if their life matters. Krishna provides a clear formula for ultimate cosmic significance: become an instrument for sharing spiritual truth. By doing so, you instantly become the most cherished entity in the eyes of the Supreme.",
+        },
+      ],
+    },
+  },
+  "ch18-v70": {
+    sanskritText:
+      "अध्येष्यते च य इमं धर्म्यं संवादमावयोः | ज्ञानयज्ञेन तेनाहमिष्टः स्यामिति मे मतिः || ७० ||",
+    transliteration:
+      "adhyeṣyate ca ya imaṁ dharmyaṁ saṁvādam āvayoḥ | jñāna-yajñena tenāham iṣṭaḥ syām iti me matiḥ || 70 ||",
+    englishTranslation:
+      "And I declare that he who studies this sacred conversation of ours worships Me by his intelligence.",
+    commentary: {
+      literal:
+        "Krishna extends the blessing to the student. He declares that anyone who carefully studies (adhyeṣyate) this sacred, righteous conversation between Himself and Arjuna (dharmyaṁ saṁvādam āvayoḥ) is actually engaging in a profound act of worship. Krishna considers this study to be a 'jñāna-yajña' (a sacrifice of knowledge), and by this intellectual sacrifice, He is worshiped and pleased (tenāham iṣṭaḥ syām). This is His firm conclusion (iti me matiḥ).",
       philosophical: {
         insight: "Intellectual Worship",
         points: [
           {
-            title: "Jñāna-yajña",
-            text: "Studying deep philosophy is often seen as an academic chore. Krishna elevates it to a sacred ritual. Using your intellect to parse out the truths of the Bhagavad Gita is not just reading; it is a 'Jñāna-yajña' (a sacrifice of the mind), which directly worships the Divine Intelligence.",
+            title: "The Mind as an Altar",
+            text: "Worship is usually associated with physical rituals—lighting lamps or offering flowers. Krishna elevates the act of studying deep philosophy to the status of a sacred ritual. Using your intellect to grapple with the truths of the Gita is a 'Jñāna-yajña'. Your intelligence becomes the fire, and your ignorance is the offering.",
           },
         ],
       },
+      mindset: {
+        intro: "The shift in reading scripture:",
+        points: [
+          {
+            title: "Thinking",
+            text: "I am just reading a historical book to gain some information -> I am performing a high-level cognitive sacrifice that directly pleases the Supreme Intelligence of the universe.",
+          },
+        ],
+      },
+    },
+  },
+  "ch18-v71": {
+    sanskritText:
+      "श्रद्धावाननसूयश्च शृणुयादपि यो नरः | सोऽपि मुक्तः शुभाँल्लोकान्प्राप्नुयात्पुण्यकर्मणाम् || ७१ ||",
+    transliteration:
+      "śraddhāvān anasūyaś ca śṛṇuyād api yo naraḥ | so 'pi muktaḥ śubhāḻ lokān prāpnuyāt puṇya-karmaṇām || 71 ||",
+    englishTranslation:
+      "And one who listens with faith and without envy becomes free from sinful reactions and attains to the auspicious planets where the pious dwell.",
+    commentary: {
+      literal:
+        "Krishna lowers the barrier to entry so that no one is excluded. Even if a person does not actively teach or rigorously study, if they simply listen (śṛṇuyād api yo naraḥ) to the Gita, they achieve massive spiritual benefits. The only requirements are that they must listen with faith (śraddhāvān) and completely without envy (anasūyaś ca). Such a person is instantly freed from karmic sins (so 'pi muktaḥ) and attains the highly auspicious, elevated planetary systems where the pious reside (śubhāḻ lokān prāpnuyāt puṇya-karmaṇām).",
+      philosophical: {
+        insight: "The Power of Pure Receptivity",
+        points: [
+          {
+            title: "Śravaṇa (Hearing)",
+            text: "In the Bhakti tradition, 'hearing' (Śravaṇa) is the first and most powerful method of spiritual awakening. Sound vibration carries consciousness. Hearing the divine instructions cleanses the subtle body of accumulated karmic dirt, provided the receiver's 'antenna' is tuned properly—meaning they harbor no envy (anasuya) toward the speaker or the message.",
+          },
+        ],
+      },
+      psychological: {
+        points: [
+          {
+            title: "The Blockage of Envy",
+            text: "Envy is the ultimate psychological earplug. If you listen to profound wisdom but are secretly envious of the teacher or resistant to the idea of a Supreme Authority, the wisdom bounces off your ego. Dropping the envy allows the healing sound to penetrate the subconscious.",
+          },
+        ],
+      },
+      inquiry: [
+        {
+          title: "Reflective Question",
+          text: "When I encounter spiritual teachings or people more advanced than me, do I listen with open, faithful receptivity, or does a subtle voice of envy and criticism block my ability to learn?",
+        },
+      ],
     },
   },
   "ch18-v72": {

@@ -211,7 +211,7 @@ export default function Adhyaya18() {
           </div>
 
           <img
-            src="/images/adhyaya18.jpg"
+            src="/images/adhyaya1.jpg"
             alt="Final Liberation"
             className="w-full h-full object-cover opacity-20 mix-blend-luminosity grayscale"
           />

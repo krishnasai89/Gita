@@ -96,7 +96,7 @@ export default function Adhyaya6() {
       <section className="relative h-screen w-full flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/adhyaya6.jpg"
+            src="/images/adhyaya1.jpg"
             className="w-full h-full object-cover opacity-10 mix-blend-luminosity scale-105"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)]" />

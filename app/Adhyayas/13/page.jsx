@@ -9,7 +9,6 @@ import {
   User,
   Layers,
   Brain,
-  Wind,
   ArrowRight,
   ArrowLeft,
   Hexagon,
@@ -91,7 +90,6 @@ export default function Adhyaya13() {
       gsap.from(".anatomy-card", {
         opacity: 1,
         x: 50,
-        stagger: 0.15,
         duration: 1,
         ease: "back.out(1.5)",
         scrollTrigger: {
@@ -140,9 +138,9 @@ export default function Adhyaya13() {
           <div className="scanline absolute top-0 left-0 w-full h-[2px] bg-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.8)]" />
 
           <img
-            src="/images/adhyaya1.jpg"
+            src="/images/adhyaya13.jpg"
             alt="The Field of Nature"
-            className="w-full h-full object-cover opacity-10 mix-blend-luminosity grayscale"
+            className="w-full h-full object-cover opacity-20 mix-blend-luminosity grayscale"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#030605]/50 via-transparent to-[#030605]" />
         </div>
